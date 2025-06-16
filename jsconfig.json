@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "./src/app",
     "paths": {
       "@/*": ["./*"],
       "@components/*": ["./components/*"],
@@ -15,5 +15,6 @@
       "@locales/*": ["./locales/*"],
       "@routes/*": ["./routes/*"],
     }
-  }
+  },
+  "include": ["src"]
 }

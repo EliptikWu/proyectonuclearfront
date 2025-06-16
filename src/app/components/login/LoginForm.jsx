@@ -7,6 +7,7 @@ import PasswordInput from '@components/common/inputs/PasswordInput';
 import CustomButton from '@components/common/CustomButton';
 import Logo from '@components/common/Logo';
 import Alert from '@components/common/alerts/Alert';
+import bookImage from '@assets/images/jpg/books-login.jpg'
 
 const LoginForm = ({ onSubmit, alert, darkMode = false }) => {
   const { t } = useTranslation();
@@ -20,8 +21,11 @@ const LoginForm = ({ onSubmit, alert, darkMode = false }) => {
       {alert && <Alert type={alert.type} message={alert.message} />}
 
       <Logo 
-        src="/src/assets/images/svg/logo-sm.svg" 
-        alt={t('login.altTexts.logoAlt')} 
+        src={bookImage}
+        alt="Logo de libros"
+        width={300}  
+        height={200} 
+        className="mx-auto mb-4"
       />
 
       <TextInput

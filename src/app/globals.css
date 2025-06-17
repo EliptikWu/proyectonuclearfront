@@ -12,6 +12,7 @@
   --color-black_text: #000000;
   --color-blue_button_login: #1E3C72;
   --color-blue_button_login_hover: #2A5298;
+  --color-border_button: #000000;
 }
 
 @theme inline {

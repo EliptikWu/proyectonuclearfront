@@ -1,31 +1,39 @@
 import PropTypes from 'prop-types';
 import { useField } from 'formik';
 
-const BaseInput = ({ name, label, className = '', inputClassName = '', errorClassName = '', ...props }) => {
+const BaseInput = ({
+  name,
+  label,
+  className = '',
+  inputClassName = '',
+  errorClassName = '',
+  ...props
+}) => {
   const [field, meta] = useField(name);
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`w-full ${className}`}>
       {label && (
         <label
           htmlFor={name}
-          className="block mb-2 text-base sm:text-lx font-medium"
+          className="block mb-2 text-sm sm:text-base font-medium text-black"
         >
           {label}
         </label>
       )}
 
       <input
+        id={name}
         {...field}
         {...props}
-        id={name}
-        className={`w-full px-3 py-2 sm:px-4 sm:py-3 border rounded-lg text-xl sm:text-sm
-          placeholder:opacity-100 focus:placeholder:opacity-0 transition-opacity duration-200
+        className={`w-full border border-gray-300 rounded-lg px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base
+          placeholder-opacity-100 focus:placeholder-opacity-0
+          focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200
           ${inputClassName}`}
       />
 
       {meta.touched && meta.error && (
-        <span className={`text-xs sm:text-sm mt-1 block text-red-500 ${errorClassName}`}>
+        <span className={`mt-1 text-xs sm:text-sm text-red-500 block ${errorClassName}`}>
           {meta.error}
         </span>
       )}

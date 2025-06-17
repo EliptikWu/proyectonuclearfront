@@ -9,8 +9,7 @@ const FormContainer = ({
   validationSchema
 }) => (
   <div
-    className={`w-full mx-auto bg-opacity-60 rounded-2xl shadow-lg p-6
-      sm:max-w-md md:max-w-lg lg:max-w-xl`}
+    className={`w-full mx-auto bg-opacity-60 rounded-2xl shadow-lg p-6`}
   >
     <Formik
       initialValues={initialValues}

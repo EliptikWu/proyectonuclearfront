@@ -2,15 +2,20 @@
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-const CustomButton = ({ children, isLoading, disabled, fullWidth = true }) => {
+const CustomButton = ({ 
+  children, 
+  isLoading, 
+  disabled, 
+  fullWidth = true, 
+  className = '' 
+}) => {
   const { t } = useTranslation();
 
   return (
     <button
       type="submit"
       disabled={disabled || isLoading}
-      className={`bg-blue_button hover:bg-blue_button_hover text-light_text font-medium rounded-lg
-        text-base sm:text-lg px-5 py-2.5 sm:py-3 ${fullWidth ? 'w-full' : ''} transition-colors duration-200`}
+      className={`${fullWidth ? 'w-full' : ''} ${className} transition-colors duration-200`}
     >
       {isLoading ? t('common.verification') : children}
     </button>
@@ -22,6 +27,7 @@ CustomButton.propTypes = {
   isLoading: PropTypes.bool,
   disabled: PropTypes.bool,
   fullWidth: PropTypes.bool,
+  className: PropTypes.string, // aquí definimos el prop adicional
 };
 
 export default CustomButton;

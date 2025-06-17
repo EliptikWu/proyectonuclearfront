@@ -1,0 +1,138 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "ok": "Aceptar",
+    "verification": "Verificando...",
+    "noDataTime": "No hay datos de tiempo disponibles",
+    "dateNoValid": "No hay datos disponibles para la fecha seleccionada",
+    "noData": "No hay datos disponibles",
+    "noInfo": "No hay información disponible del estudio",
+    "noCredencials": "Credenciales inválidas o servicio no disponible"
+  },
+  "errors": {
+    "loading": "Error al cargar los datos",
+    "conection": "Error de conexión con el servidor",
+    "data": "Error al obtener los datos del usuario",
+    "login": "Tu contraseña o usuario son incorrectos",
+    "Graph": "Error al cargar el gráfico",
+    "titleLogin": "Error de sesión"
+  },
+  "alerts":{
+    "titleLogin": "Error de inicio de sesión",
+    "sessionExpired": "Tu sesión ha caducado, por favor vuelve a iniciar sesión",
+    "invalidToken": "Token inválido",
+    "actions": {
+      "understood": "Listo",
+      "cancel": "Cancelar"
+    },
+    "success": {
+      "title": "Éxito"
+    },
+    "error": {
+      "title": "Error"
+    },
+    "warning": {
+      "title": "Advertencia"
+    },
+    "info": {
+      "title": "Información"
+    }
+  },
+  "stripchat": {
+    "earnings": {
+      "titleModel": "Ganancias de la Modelo",
+      "titleStudio": "Ganancias del Estudio",
+      "totalTips": "Total Tips",
+      "info": "Muestra la recolección de cada tipo de ganancias de la modelo seleccionada."
+    },
+    "info": {
+      "titleModel": "Información detallada de la Modelo",
+      "time": "Hora",
+      "status": "Estado",
+      "followers": "Seguidores",
+      "views": "Vistas",
+      "gender": "Género",
+      "rank": "Rango",
+      "noTime": "Sin hora",
+      "noStatus": "Sin estado",
+      "noFollowers": "Sin seguidores",
+      "noViews": "Sin vistas",
+      "noGender": "Sin género",
+      "noRank": "Sin rango",
+      "noName": "Sin nombre",
+      "earnings": "Ganancias",
+      "earningsUSD": "Ganancias en USD"  
+    },
+    "charts": {
+      "dashboard": "Dashboard",
+      "selectStudio": "Seleccionar Estudio",
+      "totalUSD": "Total en USD",
+      "ranking": "Ranking",
+      "pie": {
+        "titleModel": "Actividad diaria de la modelo",
+        "titleStudio": "Actividad diaria del estudio",
+        "info": "Se mostrarán los datos de la modelo o del estudio en general."
+      },
+      "timeline": {
+        "titleModel": "Tiempo de stream de la modelo",
+        "titleStudio": "Tiempo de stream del estudio",
+        "info": "Según la fecha elegida, se generará un rango de tiempo y se mostrarán los datos."
+      }
+    }
+  },
+  "sidebar": {
+    "altTexts": {
+      "streamateLogo": "Logo de Streamate",
+      "stripchatLogo": "Logo de Stripchat",
+      "devinLogo": "Logo de Deviant",
+      "lightBulbIcon": "Icono de bombilla"
+    },
+    "tips": {
+      "title": "Tips",
+      "autoUpdate": "Los datos de las gráficas se actualizan automáticamente cada 15 minutos",
+      "latestData": "Actualizado con los últimos datos disponibles"
+    }
+  },
+  "hooks": {
+    "auth": {
+      "invalidToken": "Token inválido",
+      "titleCaducated": "Sesión caducada",
+      "messageCaducated": "Tu sesión ha expirado"
+    }
+  },
+  "login": {
+    "forms": {
+      "button": "Iniciar sesión",
+      "labels": {
+        "username": "Usuario",
+        "password": "Contraseña"
+      },
+      "placeholders": {
+        "username": "Nombre de usuario",
+        "password": "Contraseña"
+      },
+      "validation": {
+        "lettersOnly": "Solo se permiten letras",
+        "maxLength": "Máximo {max} caracteres",
+        "minLength": "Mínimo {min} caracteres",
+        "required": "{field} es requerido",
+        "passwordComplexity": "Debe contener mayúsculas, minúsculas, números y símbolos",
+        "fieldNames": {
+          "user": "Usuario",
+          "password": "Contraseña"
+        }
+      }
+    },
+    "altTexts": {
+      "logoAlt": "Logo de la aplicación"
+    }
+  },
+  "theme": {
+    "toggleAlt": "Botón para cambiar tema de color",
+    "labels": {
+      "light": "Modo claro",
+      "dark": "Modo oscuro"
+    }
+  }
+}
+ 

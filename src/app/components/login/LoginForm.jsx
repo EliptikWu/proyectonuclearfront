@@ -7,21 +7,24 @@ import PasswordInput from '@components/common/inputs/PasswordInput';
 import CustomButton from '@components/common/CustomButton';
 import Logo from '@components/common/Logo';
 import Alert from '@components/common/alerts/Alert';
+import bookImage from '@assets/images/jpg/books-login.jpg'
 
-const LoginForm = ({ onSubmit, alert, darkMode = false }) => {
+const LoginForm = ({ onSubmit, alert }) => {
   const { t } = useTranslation();
 
   return (
     <FormContainer
-      darkMode={darkMode}
       onSubmit={onSubmit}
       initialValues={{ user: '', password: '' }}
     >
       {alert && <Alert type={alert.type} message={alert.message} />}
 
       <Logo 
-        src="/src/assets/images/svg/logo-sm.svg" 
-        alt={t('login.altTexts.logoAlt')} 
+        src={bookImage}
+        alt="Logo de libros"
+        width={300}  
+        height={200} 
+        className="mx-auto mb-4"
       />
 
       <TextInput
@@ -29,19 +32,20 @@ const LoginForm = ({ onSubmit, alert, darkMode = false }) => {
         autoComplete="username"
         label={t('login.forms.labels.username')}
         placeholder={t('login.forms.placeholders.username')}
-        darkMode={darkMode}
       />
 
       <PasswordInput
         name="password"
         label={t('login.forms.labels.password')}
         placeholder={t('login.forms.placeholders.password')}
-        darkMode={darkMode}
       />
 
-      <CustomButton>
+      <CustomButton
+        className="bg-blue_button_login hover:bg-blue_button_hover_login text-black_text font-medium rounded-lg text-base sm:text-lg px-5 py-2.5 sm:py-3"
+      >
         {t('login.forms.button')}
       </CustomButton>
+
     </FormContainer>
   );
 };
@@ -49,7 +53,6 @@ const LoginForm = ({ onSubmit, alert, darkMode = false }) => {
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   alert: PropTypes.object,
-  darkMode: PropTypes.bool,
 };
 
 export default LoginForm;

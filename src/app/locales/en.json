@@ -1,0 +1,22 @@
+{
+  "tips": {
+    "graphAutoUpdate": "Chart data is automatically updated every 15 minutes.",
+    "themeToggle": "You can switch between light and dark mode.",
+    "chartsLatestData": "Charts update with the latest available data."
+  },
+  "altTexts": {
+    "streamateLogo": "Streamate logo",
+    "stripchatLogo": "Stripchat logo",
+    "lightbulbIcon": "Lightbulb icon",
+    "themeToggleButton": "Color theme toggle button",
+    "devinSystemLogo": "Devin system logo"
+  },
+  "ui": {
+    "titles": {
+      "tipsTitle": "Tips"
+    },
+    "actions": {
+      "logout": "Logout"
+    }
+  }
+}

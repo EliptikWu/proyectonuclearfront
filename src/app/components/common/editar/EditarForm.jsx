@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, Calendar, Users, Monitor, Thermometer, Plus } from 'lucide-react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as Yup from 'yup';
 import Navbar from '@components/common/Navbar';
 import FormContainer from '@components/common/FormContainer';
-import Dropdown from '@components/common/Dropdown';
+import Dropdown from '@components/common/DropDown';
 import TextInput from '@components/common/inputs/TextInput';
 import CustomButton from '@components/common/CustomButton'
 import { useTranslation } from 'react-i18next';
 
-const ClassroomAssignmentForm = () => {
+const EditClassroomAssignmentForm = ({ assignmentData, onUpdate, onCancel }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { t } = useTranslation();
   const [ticMaterials, setTicMaterials] = useState({
@@ -62,14 +62,15 @@ const ClassroomAssignmentForm = () => {
     { value: '19:00-21:00', label: '7:00 p.m - 9:00 p.m' }
   ];
 
+  // Inicializar con datos existentes
   const initialValues = {
-    professor: '',
-    capacity: '',
-    sede: '',
-    classroom: '',
-    subject: '',
-    classType: '',
-    timeSlot: ''
+    professor: assignmentData?.professor || '',
+    capacity: assignmentData?.capacity || '',
+    sede: assignmentData?.sede || '',
+    classroom: assignmentData?.classroom || '',
+    subject: assignmentData?.subject || '',
+    classType: assignmentData?.classType || '',
+    timeSlot: assignmentData?.timeSlot || ''
   };
 
   const validationSchema = Yup.object({
@@ -85,6 +86,27 @@ const ClassroomAssignmentForm = () => {
     timeSlot: Yup.string().required(t('validation.timeSlotRequired')),
   });
 
+  // Cargar datos existentes al montar el componente
+  useEffect(() => {
+    if (assignmentData) {
+      setSelectedDate(assignmentData.date ? new Date(assignmentData.date) : new Date());
+      setTicMaterials({
+        videobeam: assignmentData.ticMaterials?.videobeam || false,
+        airConditioning: assignmentData.ticMaterials?.airConditioning || false
+      });
+      setNewTask(assignmentData.newTask || '');
+      setFormValues({
+        professor: assignmentData.professor || '',
+        capacity: assignmentData.capacity || '',
+        sede: assignmentData.sede || '',
+        classroom: assignmentData.classroom || '',
+        subject: assignmentData.subject || '',
+        classType: assignmentData.classType || '',
+        timeSlot: assignmentData.timeSlot || ''
+      });
+    }
+  }, [assignmentData]);
+
   const addTicMaterial = () => {
     if (newTask.trim()) {
       console.log('Adding new TIC material:', newTask);
@@ -93,19 +115,32 @@ const ClassroomAssignmentForm = () => {
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
-    const assignmentData = {
+    const updatedAssignmentData = {
+      ...assignmentData,
       ...values,
       date: selectedDate,
       ticMaterials,
       newTask
     };
-    console.log('Assignment data:', assignmentData);
-    alert(t('classroomAssignment.assignmentCreated'));
+    console.log('Updated assignment data:', updatedAssignmentData);
+    
+    if (onUpdate) {
+      onUpdate(updatedAssignmentData);
+    } else {
+      alert(t('classroomAssignment.assignmentUpdated'));
+    }
+    
     setSubmitting(false);
   };
 
   const handleFormChange = (values) => {
     setFormValues(values);
+  };
+
+  const handleCancel = () => {
+    if (onCancel) {
+      onCancel();
+    }
   };
 
   const getLabelByValue = (options, value) => {
@@ -118,8 +153,8 @@ const ClassroomAssignmentForm = () => {
       <Navbar />
       <div className="px-12 pt-6">
         <div className="flex items-center">
-          <ChevronLeft className="w-6 h-6 text-black_text mr-2 cursor-pointer" />
-          <h1 className="text-2xl font-bold text-black_text">{t('classroomAssignment.title')}</h1>
+          <ChevronLeft className="w-6 h-6 text-black_text mr-2 cursor-pointer" onClick={handleCancel} />
+          <h1 className="text-2xl font-bold text-black_text">{t('classroomAssignment.editTitle') || 'Editar Asignación de Aula'}</h1>
         </div>
       </div>
       <div className="flex gap-16 px-12 py-6">
@@ -151,10 +186,11 @@ const ClassroomAssignmentForm = () => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
                 onChange={handleFormChange}
+                enableReinitialize={true}
               >
                 {/* Primera fila - 2 campos con altura uniforme */}
                 <div className="grid grid-cols-2 gap-4 mb-1">
-                  <Dropdown 
+                  <Dropdown
                     name="professor" 
                     label={t('classroomAssignment.professor')} 
                     options={professorsOptions} 
@@ -173,7 +209,7 @@ const ClassroomAssignmentForm = () => {
 
                 {/* Segunda fila - 2 campos con altura uniforme */}
                 <div className="grid grid-cols-2 gap-4 mb-1">
-                  <Dropdown 
+                  <Dropdown
                     name="sede" 
                     label={t('classroomAssignment.sede')} 
                     options={sedesOptions} 
@@ -181,7 +217,7 @@ const ClassroomAssignmentForm = () => {
                     selectClassName="w-full h-12 bg-principal_purple border-purple_border text-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm" 
                     className="w-full text-white" 
                   />
-                  <Dropdown 
+                  <Dropdown
                     name="classType" 
                     label={t('classroomAssignment.classType')} 
                     options={classTypesOptions} 
@@ -200,7 +236,7 @@ const ClassroomAssignmentForm = () => {
                     inputClassName="w-full h-12 bg-principal_container border-purple_border text-gray_input_text placeholder-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm" 
                     className="w-full text-white [&>label]:text-white" 
                   />
-                  <Dropdown
+                  <Dropdown 
                     name="subject" 
                     label={t('classroomAssignment.subject')} 
                     options={subjectsOptions} 
@@ -272,9 +308,19 @@ const ClassroomAssignmentForm = () => {
                   </div>
                 </div>
 
-                <CustomButton className="w-full h-12 bg-indigo-700 hover:bg-indigo-600 text-white disabled:opacity-50 font-semibold text-base rounded-lg transition-colors">
-                  {t('classroomAssignment.assignNewRoom')}
-                </CustomButton>
+                {/* Botones de acción */}
+                <div className="flex gap-4">
+                  <CustomButton 
+                    type="button"
+                    onClick={handleCancel}
+                    className="flex-1 h-12 bg-gray-600 hover:bg-gray-500 text-white font-semibold text-base rounded-lg transition-colors"
+                  >
+                    {t('classroomAssignment.cancel') || 'Cancelar'}
+                  </CustomButton>
+                  <CustomButton className="flex-1 h-12 bg-indigo-700 hover:bg-indigo-600 text-white disabled:opacity-50 font-semibold text-base rounded-lg transition-colors">
+                    {t('classroomAssignment.updateAssignment') || 'Actualizar Asignación'}
+                  </CustomButton>
+                </div>
               </FormContainer>
             </div>
           </div>
@@ -338,4 +384,4 @@ const ClassroomAssignmentForm = () => {
   );
 };
 
-export default ClassroomAssignmentForm;
+export default EditClassroomAssignmentForm;

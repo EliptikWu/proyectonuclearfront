@@ -53,7 +53,7 @@ const Dropdown = ({
   );
 };
 
-DropdownInput.propTypes = {
+Dropdown.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
   options: PropTypes.arrayOf(

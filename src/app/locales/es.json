@@ -103,6 +103,7 @@
   "login": {
     "forms": {
       "button": "Iniciar sesión",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
       "labels": {
         "username": "Usuario",
         "password": "Contraseña"

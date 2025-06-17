@@ -5,6 +5,15 @@
   --foreground: #171717;
 }
 
+@theme {
+  --color-general_body: #F5F5F5;
+  --color-principal_container: #ffffff;
+  --color-principal_purple: #29166F;
+  --color-black_text: #000000;
+  --color-blue_button_login: #1E3C72;
+  --color-blue_button_login_hover: #2A5298;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

@@ -1,4 +1,6 @@
 "use client";
+import '../i18n';
+
 import LoginForm from '@components/login/LoginForm';
 import Alert from '@components/common/alerts/Alert';
 import PropTypes from 'prop-types';

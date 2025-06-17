@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useField } from 'formik';
 
-const DropdownInput = ({
+const Dropdown = ({
   name,
   label,
   options,
@@ -16,17 +16,22 @@ const DropdownInput = ({
   return (
     <div className={`w-full ${className}`}>
       {label && (
-        <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1">
+        <label 
+          htmlFor={name} 
+          className="block mb-2 text-sm font-medium text-black"
+        >
           {label}
         </label>
       )}
+      
       <select
         id={name}
         {...field}
         {...props}
-        className={`w-full border rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-principal_purple ${
-          meta.touched && meta.error ? 'border-red-500' : 'border-gray-300'
-        } ${selectClassName}`}
+        className={`w-full h-12 border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white
+          focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200
+          ${meta.touched && meta.error ? 'border-red-500' : 'border-gray-300'}
+          ${selectClassName}`}
       >
         <option value="">{placeholderOption}</option>
         {options.map(({ value, label }) => (
@@ -35,9 +40,15 @@ const DropdownInput = ({
           </option>
         ))}
       </select>
-      {meta.touched && meta.error && (
-        <div className={`text-red-500 text-xs mt-1 ${errorClassName}`}>{meta.error}</div>
-      )}
+      
+      {/* Contenedor fijo para el error que siempre ocupa espacio */}
+      <div className="h-5 mt-1">
+        {meta.touched && meta.error && (
+          <span className={`text-xs text-red-500 block ${errorClassName}`}>
+            {meta.error}
+          </span>
+        )}
+      </div>
     </div>
   );
 };
@@ -57,4 +68,4 @@ DropdownInput.propTypes = {
   placeholderOption: PropTypes.string,
 };
 
-export default DropdownInput;
+export default Dropdown;

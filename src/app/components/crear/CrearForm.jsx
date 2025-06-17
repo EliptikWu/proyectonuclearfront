@@ -7,10 +7,12 @@ import Navbar from '@components/common/Navbar';
 import FormContainer from '@components/common/FormContainer';
 import DropdownInput from '@components/common/Dropdown';
 import TextInput from '@components/common/inputs/TextInput';
-import CustomButton from '@components/common/CustomButton';
+import CustomButton from '@components/common/CustomButton'
+import { useTranslation } from 'react-i18next';
 
 const ClassroomAssignmentForm = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const { t } = useTranslation();
   const [ticMaterials, setTicMaterials] = useState({
     videobeam: false,
     airConditioning: false
@@ -71,16 +73,16 @@ const ClassroomAssignmentForm = () => {
   };
 
   const validationSchema = Yup.object({
-    professor: Yup.string().required('Profesor es requerido'),
+    professor: Yup.string().required(t('validation.professorRequired')),
     capacity: Yup.number()
-      .required('Capacidad es requerida')
-      .positive('Debe ser un número positivo')
-      .integer('Debe ser un número entero'),
-    sede: Yup.string().required('Sede es requerida'),
-    classroom: Yup.string().required('Salón es requerido'),
-    subject: Yup.string().required('Materia es requerida'),
-    classType: Yup.string().required('Tipo de aula es requerido'),
-    timeSlot: Yup.string().required('Horario es requerido'),
+      .required(t('validation.capacityRequired'))
+      .positive(t('validation.capacityPositive'))
+      .integer(t('validation.capacityInteger')),
+    sede: Yup.string().required(t('validation.sedeRequired')),
+    classroom: Yup.string().required(t('validation.classroomRequired')),
+    subject: Yup.string().required(t('validation.subjectRequired')),
+    classType: Yup.string().required(t('validation.classTypeRequired')),
+    timeSlot: Yup.string().required(t('validation.timeSlotRequired')),
   });
 
   const addTicMaterial = () => {
@@ -98,7 +100,7 @@ const ClassroomAssignmentForm = () => {
       newTask
     };
     console.log('Assignment data:', assignmentData);
-    alert('Asignación creada exitosamente');
+    alert(t('classroomAssignment.assignmentCreated'));
     setSubmitting(false);
   };
 
@@ -112,27 +114,22 @@ const ClassroomAssignmentForm = () => {
   };
 
   return (
-<div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
-       <div className="px-12 pt-6">
+      <div className="px-12 pt-6">
         <div className="flex items-center">
-        <ChevronLeft className="w-6 h-6 text-gray-600 mr-2 cursor-pointer" />
-        <h1 className="text-2xl font-bold text-gray-800">Crear nueva asignación de aula</h1>
-    </div>
-  </div>
+          <ChevronLeft className="w-6 h-6 text-black_text mr-2 cursor-pointer" />
+          <h1 className="text-2xl font-bold text-black_text">{t('classroomAssignment.title')}</h1>
+        </div>
+      </div>
       <div className="flex gap-16 px-12 py-6">
         {/* Formulario + Calendario */}
-        <div className="flex-[3] bg-indigo-900 rounded-lg p-6 text-white">
-          <div className="flex items-center mb-6">
-            <ChevronLeft className="w-6 h-6 text-gray-200 mr-2 cursor-pointer" />
-            <h1 className="text-2xl font-bold text-white">Crear nueva asignación de aula</h1>
-          </div>
-
+        <div className="flex-[3] bg-principal_purple rounded-lg p-6">
           <div className="grid grid-cols-4 gap-6 mb-6">
             {/* Calendario - Primera columna */}
             <div className="col-span-1">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold">Seleccionar Fecha</h3>
+                <h3 className="font-semibold">{t('classroomAssignment.selectDate')}</h3>
                 <Calendar className="w-5 h-5" />
               </div>
               <DatePicker
@@ -140,9 +137,9 @@ const ClassroomAssignmentForm = () => {
                 onChange={(date) => setSelectedDate(date)}
                 inline
                 className="w-full"
-                calendarClassName="border-indigo-700 bg-indigo-800 rounded-lg"
-                dayClassName={() => "text-white hover:bg-indigo-700"}
-                monthClassName={() => "text-white"}
+                calendarClassName="border-black_text bg-principal_purple rounded-lg"
+                dayClassName={() => "text-white_text hover:bg-principal_purple"}
+                monthClassName={() => "text-white_text"}
                 weekDayClassName={() => "text-indigo-300"}
               />
             </div>
@@ -155,128 +152,128 @@ const ClassroomAssignmentForm = () => {
                 onSubmit={handleSubmit}
                 onChange={handleFormChange}
               >
-                {/* Primera fila - 2 campos */}
-                <div className="grid grid-cols-2 gap-6 mb-6">
+                {/* Primera fila - 2 campos con altura uniforme */}
+                <div className="grid grid-cols-2 gap-4 mb-1">
                   <DropdownInput 
                     name="professor" 
-                    label="Profesor" 
+                    label={t('classroomAssignment.professor')} 
                     options={professorsOptions} 
-                    placeholderOption="Ingrese el nombre del profesor *" 
-                    selectClassName="w-full h-12 bg-indigo-800 border-indigo-700 text-white focus:ring-indigo-500 px-4" 
+                    placeholderOption={t('classroomAssignment.professorPlaceholder')} 
+                    selectClassName="w-full h-12 bg-principal_purple border-purple_border text-gray_input_text placeholder-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm" 
                     className="w-full text-white" 
                   />
                   <TextInput 
                     name="capacity" 
-                    label="Capacidad de aula" 
-                    placeholder="Ingrese la capacidad del aula *" 
-                    inputClassName="w-full h-12 bg-indigo-800 border-indigo-700 text-white placeholder-indigo-300 focus:ring-indigo-500 px-4" 
-                    className="w-full text-white" 
+                    label={t('classroomAssignment.capacity')} 
+                    placeholder={t('classroomAssignment.capacityPlaceholder')} 
+                    inputClassName="w-full h-12 bg-principal_container border-purple_border text-gray_input_text placeholder-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm" 
+                    className="w-full text-white [&>label]:text-white" 
                   />
                 </div>
 
-                {/* Segunda fila - 2 campos */}
-                <div className="grid grid-cols-2 gap-6 mb-6">
+                {/* Segunda fila - 2 campos con altura uniforme */}
+                <div className="grid grid-cols-2 gap-4 mb-1">
                   <DropdownInput 
                     name="sede" 
-                    label="Sede" 
+                    label={t('classroomAssignment.sede')} 
                     options={sedesOptions} 
-                    placeholderOption="Ingrese la sede *" 
-                    selectClassName="w-full h-12 bg-indigo-800 border-indigo-700 text-white focus:ring-indigo-500 px-4" 
+                    placeholderOption={t('classroomAssignment.sedePlaceholder')} 
+                    selectClassName="w-full h-12 bg-principal_purple border-purple_border text-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm" 
                     className="w-full text-white" 
                   />
                   <DropdownInput 
                     name="classType" 
-                    label="Tipo de aula" 
+                    label={t('classroomAssignment.classType')} 
                     options={classTypesOptions} 
-                    placeholderOption="Ingrese el tipo de aula *" 
-                    selectClassName="w-full h-12 bg-indigo-800 border-indigo-700 text-white focus:ring-indigo-500 px-4" 
+                    placeholderOption={t('classroomAssignment.classTypePlaceholder')} 
+                    selectClassName="w-full h-12 bg-principal_purple border-purple_border text-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm" 
                     className="w-full text-white" 
                   />
                 </div>
 
-                {/* Tercera fila - 2 campos */}
-                <div className="grid grid-cols-2 gap-6 mb-6">
+                {/* Tercera fila - 2 campos con altura uniforme */}
+                <div className="grid grid-cols-2 gap-4 mb-1">
                   <TextInput 
                     name="classroom" 
-                    label="Salón" 
-                    placeholder="3D2 *" 
-                    inputClassName="w-full h-12 bg-indigo-800 border-indigo-700 text-white placeholder-indigo-300 focus:ring-indigo-500 px-4" 
-                    className="w-full text-white" 
+                    label={t('classroomAssignment.classroom')} 
+                    placeholder={t('classroomAssignment.classroomPlaceholder')} 
+                    inputClassName="w-full h-12 bg-principal_container border-purple_border text-gray_input_text placeholder-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm" 
+                    className="w-full text-white [&>label]:text-white" 
                   />
                   <DropdownInput 
                     name="subject" 
-                    label="Materia" 
+                    label={t('classroomAssignment.subject')} 
                     options={subjectsOptions} 
-                    placeholderOption="Ingeniería de Software IV *" 
-                    selectClassName="w-full h-12 bg-indigo-800 border-indigo-700 text-white focus:ring-indigo-500 px-4" 
+                    placeholderOption={t('classroomAssignment.subjectPlaceholder')} 
+                    selectClassName="w-full h-12 bg-principal_purple border-purple_border text-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm" 
                     className="w-full text-white" 
                   />
                 </div>
 
                 {/* Cuarta fila - 1 campo ancho */}
-                <div className="mb-6">
+                <div className="mb-4">
                   <DropdownInput 
                     name="timeSlot" 
-                    label="Hora de ingreso y salida" 
+                    label={t('classroomAssignment.timeSlot')} 
                     options={timeSlotOptions} 
-                    placeholderOption="Ingrese el horario *" 
-                    selectClassName="w-full h-12 bg-indigo-800 border-indigo-700 text-white focus:ring-indigo-500 px-4" 
+                    placeholderOption={t('classroomAssignment.timeSlotPlaceholder')} 
+                    selectClassName="w-full h-12 bg-principal_purple border-purple_border text-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm" 
                     className="w-full text-white" 
                   />
                 </div>
 
                 {/* Material TIC */}
                 <div className="mb-6">
-                  <div className="bg-indigo-800 rounded-lg p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <h4 className="font-medium text-lg">Material TIC</h4>
+                  <div className="bg-indigo-800 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="font-medium text-base">{t('classroomAssignment.ticMaterial')}</h4>
                       <button type="button" className="text-indigo-300 text-sm hover:text-white underline">
-                        View
+                        {t('classroomAssignment.view')}
                       </button>
                     </div>
-                    <div className="grid grid-cols-2 gap-4 mb-4">
-                      <label className="flex items-center p-3 bg-indigo-700 rounded-lg hover:bg-indigo-600 cursor-pointer">
+                    <div className="grid grid-cols-2 gap-3 mb-3">
+                      <label className="flex items-center p-2 bg-indigo-700 rounded-lg hover:bg-indigo-600 cursor-pointer">
                         <input 
                           type="checkbox" 
                           checked={ticMaterials.videobeam} 
                           onChange={(e) => setTicMaterials({ ...ticMaterials, videobeam: e.target.checked })} 
-                          className="mr-3 w-4 h-4 bg-indigo-600 border-indigo-500 text-indigo-200 rounded" 
+                          className="mr-2 w-4 h-4 bg-indigo-600 border-indigo-500 text-indigo-200 rounded" 
                         />
-                        <Monitor className="w-5 h-5 mr-3 text-indigo-300" />
-                        <span className="text-sm font-medium">Videobeam</span>
+                        <Monitor className="w-4 h-4 mr-2 text-indigo-300" />
+                        <span className="text-sm font-medium">{t('classroomAssignment.videobeam')}</span>
                       </label>
-                      <label className="flex items-center p-3 bg-indigo-700 rounded-lg hover:bg-indigo-600 cursor-pointer">
+                      <label className="flex items-center p-2 bg-indigo-700 rounded-lg hover:bg-indigo-600 cursor-pointer">
                         <input 
                           type="checkbox" 
                           checked={ticMaterials.airConditioning} 
                           onChange={(e) => setTicMaterials({ ...ticMaterials, airConditioning: e.target.checked })} 
-                          className="mr-3 w-4 h-4 bg-indigo-600 border-indigo-500 text-indigo-200 rounded" 
+                          className="mr-2 w-4 h-4 bg-indigo-600 border-indigo-500 text-indigo-200 rounded" 
                         />
-                        <Thermometer className="w-5 h-5 mr-3 text-indigo-300" />
-                        <span className="text-sm font-medium">Aire acondicionador</span>
+                        <Thermometer className="w-4 h-4 mr-2 text-indigo-300" />
+                        <span className="text-sm font-medium">{t('classroomAssignment.airConditioning')}</span>
                       </label>
                     </div>
                     <div className="flex gap-3">
                       <input 
                         type="text" 
-                        placeholder="Enter new task" 
+                        placeholder={t('classroomAssignment.enterNewTask')} 
                         value={newTask} 
                         onChange={(e) => setNewTask(e.target.value)} 
-                        className="flex-1 h-12 px-4 border border-indigo-600 bg-indigo-700 text-white placeholder-indigo-400 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
+                        className="flex-1 h-9 px-3 py-1 border border-indigo-600 bg-indigo-700 text-white placeholder-indigo-400 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
                       />
                       <button 
                         type="button" 
                         onClick={addTicMaterial} 
-                        className="px-6 h-12 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-500 flex items-center justify-center transition-colors"
+                        className="px-4 h-9 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-500 flex items-center justify-center transition-colors"
                       >
-                        Add Item
+                        {t('classroomAssignment.addItem')}
                       </button>
                     </div>
                   </div>
                 </div>
 
-                <CustomButton className="w-full h-14 bg-indigo-700 hover:bg-indigo-600 text-white disabled:opacity-50 font-semibold text-lg rounded-lg transition-colors">
-                  Asignar nueva sala
+                <CustomButton className="w-full h-12 bg-indigo-700 hover:bg-indigo-600 text-white disabled:opacity-50 font-semibold text-base rounded-lg transition-colors">
+                  {t('classroomAssignment.assignNewRoom')}
                 </CustomButton>
               </FormContainer>
             </div>
@@ -287,50 +284,50 @@ const ClassroomAssignmentForm = () => {
         <div className="flex-[1] mx-4">
           <div className="w-full bg-white p-8 shadow-lg rounded-lg">
             <div className="bg-indigo-900 text-white p-4 rounded-lg mb-4">
-              <h3 className="font-medium mb-1">PREVISUALIZACIÓN DE LA CLASE</h3>
+              <h3 className="font-medium mb-1">{t('classroomAssignment.classPreview')}</h3>
             </div>
 
             <div className="bg-gray-100 rounded-lg p-4">
               <div className="mb-4">
                 <div className="flex items-center mb-2">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
-                  <span className="font-medium text-gray-800">Clase Principal</span>
+                  <span className="font-medium text-gray-800">{t('classroomAssignment.mainClass')}</span>
                 </div>
-                <p className="text-sm text-gray-600 mb-1">{formValues.timeSlot ? getLabelByValue(timeSlotOptions, formValues.timeSlot) : 'Horario por asignar'}</p>
+                <p className="text-sm text-gray-600 mb-1">{formValues.timeSlot ? getLabelByValue(timeSlotOptions, formValues.timeSlot) : t('classroomAssignment.scheduleToAssign')}</p>
                 <div className="flex items-center text-sm text-gray-600 mb-1">
                   <Calendar className="w-4 h-4 mr-1" />
                   <span>{selectedDate.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                 </div>
                 <div className="flex items-center text-sm text-gray-600 mb-1">
                   <Users className="w-4 h-4 mr-1" />
-                  <span>{formValues.professor ? getLabelByValue(professorsOptions, formValues.professor) : 'Profesor por asignar'}</span>
+                  <span>{formValues.professor ? getLabelByValue(professorsOptions, formValues.professor) : t('classroomAssignment.professorToAssign')}</span>
                 </div>
-                <p className="text-sm text-gray-600 mb-1">{formValues.sede ? getLabelByValue(sedesOptions, formValues.sede) : 'Sede por asignar'}</p>
-                <p className="text-sm text-gray-600 mb-1">{formValues.classroom || 'Aula por asignar'}</p>
-                <p className="text-sm text-gray-600 mb-1">{formValues.subject ? getLabelByValue(subjectsOptions, formValues.subject) : 'Materia por asignar'}</p>
-                <p className="text-sm text-gray-600 mb-1">{formValues.capacity ? `Capacidad: ${formValues.capacity}` : 'Capacidad por definir'}</p>
-                <p className="text-sm text-gray-600">{formValues.classType ? getLabelByValue(classTypesOptions, formValues.classType) : 'Tipo de aula por definir'}</p>
+                <p className="text-sm text-gray-600 mb-1">{formValues.sede ? getLabelByValue(sedesOptions, formValues.sede) : t('classroomAssignment.sedeToAssign')}</p>
+                <p className="text-sm text-gray-600 mb-1">{formValues.classroom || t('classroomAssignment.classroomToAssign')}</p>
+                <p className="text-sm text-gray-600 mb-1">{formValues.subject ? getLabelByValue(subjectsOptions, formValues.subject) : t('classroomAssignment.subjectToAssign')}</p>
+                <p className="text-sm text-gray-600 mb-1">{formValues.capacity ? `${t('classroomAssignment.capacity')}: ${formValues.capacity}` : t('classroomAssignment.capacityToDefine')}</p>
+                <p className="text-sm text-gray-600">{formValues.classType ? getLabelByValue(classTypesOptions, formValues.classType) : t('classroomAssignment.classTypeToDefine')}</p>
               </div>
 
               <div>
                 <div className="flex items-center mb-2">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
-                  <span className="font-medium text-gray-800">Material TIC</span>
+                  <span className="font-medium text-gray-800">{t('classroomAssignment.ticMaterial')}</span>
                 </div>
                 {ticMaterials.videobeam && (
                   <div className="flex items-center text-sm text-gray-600 mb-1">
                     <Monitor className="w-4 h-4 mr-2" />
-                    <span>Videobeam</span>
+                    <span>{t('classroomAssignment.videobeam')}</span>
                   </div>
                 )}
                 {ticMaterials.airConditioning && (
                   <div className="flex items-center text-sm text-gray-600">
                     <Thermometer className="w-4 h-4 mr-2" />
-                    <span>Aire acondicionador</span>
+                    <span>{t('classroomAssignment.airConditioning')}</span>
                   </div>
                 )}
                 {!ticMaterials.videobeam && !ticMaterials.airConditioning && (
-                  <p className="text-sm text-gray-600">Sin material TIC seleccionado</p>
+                  <p className="text-sm text-gray-600">{t('classroomAssignment.noTicMaterial')}</p>
                 )}
               </div>
             </div>

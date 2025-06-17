@@ -142,5 +142,53 @@
       "light": "Modo claro",
       "dark": "Modo oscuro"
     }
+  },
+  "classroomAssignment": {
+    "title": "Crear nueva asignación de aula",
+    "selectDate": "Seleccionar Fecha",
+    "professor": "Profesor",
+    "professorPlaceholder": "Ingrese el nombre del profesor *",
+    "capacity": "Capacidad de aula",
+    "capacityPlaceholder": "Ingrese la capacidad del aula *",
+    "sede": "Sede",
+    "sedePlaceholder": "Ingrese la sede *",
+    "classType": "Tipo de aula",
+    "classTypePlaceholder": "Ingrese el tipo de aula *",
+    "classroom": "Salón",
+    "classroomPlaceholder": "3D2 *",
+    "subject": "Materia",
+    "subjectPlaceholder": "Ingeniería de Software IV *",
+    "timeSlot": "Hora de ingreso y salida",
+    "timeSlotPlaceholder": "Ingrese el horario *",
+    "ticMaterial": "Material TIC",
+    "view": "View",
+    "videobeam": "Videobeam",
+    "airConditioning": "Aire acondicionador",
+    "enterNewTask": "Enter new task",
+    "addItem": "Add Item",
+    "assignNewRoom": "Asignar nueva sala",
+    "classPreview": "PREVISUALIZACIÓN DE LA CLASE",
+    "mainClass": "Clase Principal",
+    "scheduleToAssign": "Horario por asignar",
+    "professorToAssign": "Profesor por asignar",
+    "sedeToAssign": "Sede por asignar",
+    "classroomToAssign": "Aula por asignar",
+    "subjectToAssign": "Materia por asignar",
+    "capacityToDefine": "Capacidad por definir",
+    "classTypeToDefine": "Tipo de aula por definir",
+    "noTicMaterial": "Sin material TIC seleccionado",
+    "assignmentCreated": "Asignación creada exitosamente"
+  },
+
+  "validation": {
+    "professorRequired": "Profesor es requerido",
+    "capacityRequired": "Capacidad es requerida",
+    "capacityPositive": "Debe ser un número positivo",
+    "capacityInteger": "Debe ser un número entero",
+    "sedeRequired": "Sede es requerida",
+    "classroomRequired": "Salón es requerido",
+    "subjectRequired": "Materia es requerida",
+    "classTypeRequired": "Tipo de aula es requerido",
+    "timeSlotRequired": "Horario es requerido"
   }
 }

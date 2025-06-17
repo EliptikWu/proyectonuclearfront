@@ -16,7 +16,7 @@ const BaseInput = ({
       {label && (
         <label
           htmlFor={name}
-          className="block mb-2 text-sm sm:text-base font-medium text-black"
+          className="block mb-2 text-sm font-medium text-black"
         >
           {label}
         </label>
@@ -26,17 +26,21 @@ const BaseInput = ({
         id={name}
         {...field}
         {...props}
-        className={`w-full border border-gray-300 rounded-lg px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base
+        className={`w-full h-12 border border-gray-300 rounded-lg px-3 py-2 text-sm
           placeholder-opacity-100 focus:placeholder-opacity-0
           focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200
+          ${meta.touched && meta.error ? 'border-red-500' : 'border-gray-300'}
           ${inputClassName}`}
       />
 
-      {meta.touched && meta.error && (
-        <span className={`mt-1 text-xs sm:text-sm text-red-500 block ${errorClassName}`}>
-          {meta.error}
-        </span>
-      )}
+      {/* Contenedor fijo para el error que siempre ocupa espacio */}
+      <div className="h-5 mt-1">
+        {meta.touched && meta.error && (
+          <span className={`text-xs text-red-500 block ${errorClassName}`}>
+            {meta.error}
+          </span>
+        )}
+      </div>
     </div>
   );
 };

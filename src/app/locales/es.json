@@ -7,7 +7,13 @@
     "dateNoValid": "No hay datos disponibles para la fecha seleccionada",
     "noData": "No hay datos disponibles",
     "noInfo": "No hay información disponible del estudio",
-    "noCredencials": "Credenciales inválidas o servicio no disponible"
+    "noCredencials": "Credenciales inválidas o servicio no disponible",
+    "Home": "Inicio",
+    "Classroom": "Aulas",
+    "Users": "Usuarios",
+    "automation": "Automatización",
+    "subjects": "Asignaturas",
+    "backHome": "Volver al inicio"
   },
   "errors": {
     "loading": "Error al cargar los datos",
@@ -15,9 +21,11 @@
     "data": "Error al obtener los datos del usuario",
     "login": "Tu contraseña o usuario son incorrectos",
     "Graph": "Error al cargar el gráfico",
-    "titleLogin": "Error de sesión"
+    "titleLogin": "Error de sesión",
+    "notFound": "¡Vaya! Página no encontrada",
+    "404": "No pudimos encontrar la página que buscas. Es posible que la dirección haya cambiado o no exista."
   },
-  "alerts":{
+  "alerts": {
     "titleLogin": "Error de inicio de sesión",
     "sessionExpired": "Tu sesión ha caducado, por favor vuelve a iniciar sesión",
     "invalidToken": "Token inválido",
@@ -61,7 +69,7 @@
       "noRank": "Sin rango",
       "noName": "Sin nombre",
       "earnings": "Ganancias",
-      "earningsUSD": "Ganancias en USD"  
+      "earningsUSD": "Ganancias en USD"
     },
     "charts": {
       "dashboard": "Dashboard",
@@ -135,4 +143,3 @@
     }
   }
 }
- 

@@ -1,30 +1,43 @@
 "use client";
+import { Pencil, Trash2, Eye, Users, MapPin, Hash, Presentation } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export default function ClassroomCard({ classroom }) {
   const { t } = useTranslation();
 
   return (
-    <div className="rounded-2xl border border-purple-200 shadow-md bg-[var(--color-principal_container)] p-4 flex flex-col justify-between hover:shadow-lg transition">
-      <h3 className="font-bold text-xl text-[var(--color-principal_purple)] mb-2">
-        {t(`classrooms.sites.${classroom.site}`)}
-      </h3>
-
-      <div className="flex flex-col gap-2 text-[var(--color-black_text)] text-sm mb-4">
-        <span>
-          {t("classrooms.capacity", { count: classroom.capacity })}
-        </span>
-        <span>
-          {t("classrooms.room", { room: classroom.room })}
-        </span>
-        <span>{t(`classrooms.resources.${classroom.resources}`)}</span>
+    <div className="relative rounded-2xl border border-purple-300 shadow-md bg-white p-6 hover:shadow-xl transition-all flex flex-col justify-between">
+      {/* Título + CRUD */}
+      <div className="flex justify-between items-start mb-4">
+        <h3 className="font-bold text-lg text-black">
+          {t(`classrooms.sites.${classroom.site}`)}
+        </h3>
+        <div className="flex gap-3 text-gray-600">
+          <Pencil className="w-5 h-5 cursor-pointer hover:text-purple-700" />
+          <Trash2 className="w-5 h-5 cursor-pointer hover:text-red-600" />
+          <Eye className="w-5 h-5 cursor-pointer hover:text-blue-600" />
+        </div>
       </div>
 
-      <button
-        className="mt-auto text-white font-semibold py-2 px-4 rounded-lg bg-[var(--color-blue_button_login)] hover:bg-[var(--color-blue_button_login_hover)]"
-      >
-        {t("classrooms.details")}
-      </button>
+      {/* Info del aula */}
+      <div className="space-y-4 text-sm text-black">
+        <div className="flex items-center gap-3">
+          <Users size={20} className="text-[var(--color-principal_purple)]" />
+          <span className="font-semibold">{classroom.capacity} estudiantes</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <MapPin size={20} className="text-[var(--color-principal_purple)]" />
+          <span className="font-semibold">{t(`classrooms.sites.${classroom.site}`)}</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <Hash size={20} className="text-[var(--color-principal_purple)]" />
+          <span className="font-semibold">{classroom.room}</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <Presentation size={20} className="text-[var(--color-principal_purple)]" />
+          <span className="font-semibold">{t(`classrooms.resources.${classroom.resources}`)}</span>
+        </div>
+      </div>
     </div>
   );
 }

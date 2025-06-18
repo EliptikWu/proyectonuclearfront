@@ -155,7 +155,9 @@ const ClassroomAssignmentForm = () => {
       .max(500, t('validation.capacityMax', 'La capacidad máxima es 500'))
       .typeError(t('validation.capacityMustBeNumber', 'La capacidad debe ser un número')),
     sede: Yup.string().required(t('validation.sedeRequired', 'La sede es requerida')),
-    classroom: Yup.string().required(t('validation.classroomRequired', 'El aula es requerida')),
+    classroom: Yup.string()
+      .required(t('validation.classroomRequired', 'El aula es requerida'))
+      .matches(/^AULA-\d{3}$/, t('validation.classroomFormat', 'El formato del aula debe ser AULA-XXX')),
     subject: Yup.string().required(t('validation.subjectRequired', 'La materia es requerida')),
     classType: Yup.string().required(t('validation.classTypeRequired', 'El tipo de clase es requerido')),
     timeSlot: Yup.string().required(t('validation.timeSlotRequired', 'El horario es requerido')),
@@ -384,7 +386,7 @@ const ClassroomAssignmentForm = () => {
                     options={professorsOptions} 
                     placeholderOption={t('classroomAssignment.professorPlaceholder')} 
                     selectClassName="w-full h-10 sm:h-12 bg-principal_purple border-purple_border text-gray_input_text placeholder-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm" 
-                    className="w-full text-white" 
+                    className="w-full text-white [&>label]:text-white" 
                   />
                   <TextInput 
                     name="capacity" 
@@ -421,14 +423,13 @@ const ClassroomAssignmentForm = () => {
                 {/* Tercera fila */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div className="relative">
-                    <Dropdown 
-                      name="classroom" 
-                      label={t('classroomAssignment.classroom')} 
-                      options={aulasOptions}
-                      placeholderOption={loadingAulas ? 'Cargando aulas...' : t('classroomAssignment.classroomPlaceholder')} 
-                      selectClassName="w-full h-10 sm:h-12 bg-principal_purple border-purple_border text-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm" 
-                      className="w-full text-white" 
-                      disabled={loadingAulas}
+                    <TextInput
+                      name="classroom"
+                      label={t('classroomAssignment.classroom')}
+                      placeholder="Ej: AULA-101"
+                      inputClassName="w-full h-10 sm:h-12 bg-principal_container border-purple_border text-gray_input_text placeholder-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm"
+                      className="w-full text-white [&>label]:text-white"
+                      type="text"
                     />
                     {loadingAulas && (
                       <div className="absolute right-3 top-1/2 transform -translate-y-1/2">

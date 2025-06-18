@@ -18,7 +18,7 @@ const Dropdown = ({
       {label && (
         <label 
           htmlFor={name} 
-          className="block mb-2 text-sm font-medium text-black"
+          className="block mb-2 text-sm font-medium text-white"
         >
           {label}
         </label>

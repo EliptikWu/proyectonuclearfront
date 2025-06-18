@@ -2,7 +2,7 @@
 import '../../i18n';
 
 import Header from '@components/common/Navbar';
-import CrearRecursos from '@components/resources/EditarRecursos';
+import EditarRecursos from '@components/resources/EditarRecursos';
 import Alert from '@components/common/alerts/Alert';
 import PropTypes from 'prop-types';
 

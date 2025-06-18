@@ -68,13 +68,13 @@ const CrearRecursos = ({ alert = null, onSubmit = () => {} }) => {
               name="nombreTic"
               label="Nombre del TIC"
               placeholder="Ej: Videobeam"
-              inputClassName="w-full"
+              inputClassName="w-full text-black"
             />
             <TextInput
               name="descripcion"
               label="Descripción"
               placeholder="Descripción del recurso TIC"
-              inputClassName="w-full"
+              inputClassName="w-full text-black"
             />
             <Dropdown
               name="disponible"
@@ -84,14 +84,14 @@ const CrearRecursos = ({ alert = null, onSubmit = () => {} }) => {
                 { label: 'No', value: 'no' },
               ]}
               placeholderOption="Seleccione una opción"
-              selectClassName="w-full"
+              selectClassName="w-full text-black"
             />
             <TextInput
               name="cantidad"
               label="Cantidad"
               type="number"
               placeholder="Ej: 5"
-              inputClassName="w-full"
+              inputClassName="w-full text-black"
             />
           </div>
 

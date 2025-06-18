@@ -26,8 +26,7 @@ export default function RecursosCard({ recursos, onDelete }) {
     router.push(`/recursos/ver?id=${recursos.id}`);
   };
 
-const nombreRecurso = recursos.nombre || t("recursos.noName", "Recurso sin nombre");
-
+  const nombreRecurso = recursos.nombre || t("recursos.noName", "Recurso sin nombre");
 
   return (
     <>
@@ -61,6 +60,16 @@ const nombreRecurso = recursos.nombre || t("recursos.noName", "Recurso sin nombr
           <div className="flex items-center gap-3">
             <span className="font-semibold">
               {t("recursos.quantity", "Cantidad")}: {recursos.cantidad || 0}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span
+              className={`w-3 h-3 rounded-full ${
+                recursos.estado === "DISPONIBLE" ? "bg-green-500" : "bg-red-500"
+              }`}
+            ></span>
+            <span className="font-semibold">
+              {recursos.estado || t("recursos.noState", "Sin estado")}
             </span>
           </div>
         </div>

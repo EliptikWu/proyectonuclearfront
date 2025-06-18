@@ -55,6 +55,7 @@
     "titleLogin": "Error de inicio de sesión",
     "sessionExpired": "Tu sesión ha caducado, por favor vuelve a iniciar sesión",
     "invalidToken": "Token inválido",
+    "deleteRecurso": "¿Estás seguro de que deseas eliminar el recurso \"{{nombre}}\"?",
     "actions": {
       "understood": "Listo",
       "cancel": "Cancelar",

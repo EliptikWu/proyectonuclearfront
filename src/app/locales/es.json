@@ -57,7 +57,8 @@
     "invalidToken": "Token inválido",
     "actions": {
       "understood": "Listo",
-      "cancel": "Cancelar"
+      "cancel": "Cancelar",
+      "confirmDelete": "Sí, eliminar"
     },
     "success": {
       "title": "Éxito"
@@ -70,7 +71,8 @@
     },
     "info": {
       "title": "Información"
-    }
+    },
+    "deleteClassroom": "¿Estás seguro de que deseas eliminar el aula \"{{room}}\"?"
   },
   "stripchat": {
     "earnings": {
@@ -203,7 +205,10 @@
     "capacityToDefine": "Capacidad por definir",
     "classTypeToDefine": "Tipo de aula por definir",
     "noTicMaterial": "Sin material TIC seleccionado",
-    "assignmentCreated": "Asignación creada exitosamente"
+    "assignmentCreated": "Asignación creada exitosamente",
+    "editTitle": "Editar asignación de aula",
+    "cancel": "Cancelar",
+    "updateAssignment": "Actualizar asignación"
   },
   "validation": {
     "professorRequired": "Profesor es requerido",

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import VisualizarAuditoria from '@components/common/auditoria/visualizarAuditoria';
 import Alert from '@components/common/alerts/Alert';
 import PropTypes from 'prop-types';
-import { auditorias } from '@/data/auditoria';
+import { auditorias } from '@data/auditoria';
 
 export default function AuditoriaPage({ alert = null, handleSubmit = () => {} }) {
   const router = useRouter();

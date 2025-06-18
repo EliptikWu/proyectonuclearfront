@@ -1,9 +1,9 @@
 "use client";
-import ClassroomHeader from "@/components/Classroom/ClassroomHeader";
-import ClassroomCard from "@/components/Classroom/ClassroomCard";
+import ClassroomHeader from "@components/Classroom/ClassroomHeader";
+import ClassroomCard from "@components/Classroom/ClassroomCard";
 import classrooms from "../../data/classrooms"; 
 import { useState } from "react";
-import Header from "@/components/common/Navbar"; 
+import Header from "@components/common/Navbar"; 
 
 export default function AulasVisualizar() {
   const [searchQuery, setSearchQuery] = useState("");

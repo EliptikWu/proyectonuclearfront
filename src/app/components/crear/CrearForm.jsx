@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, Calendar, Users, Monitor, Thermometer, Plus } from 'lucide-react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -7,8 +7,18 @@ import Navbar from '@components/common/Navbar';
 import FormContainer from '@components/common/FormContainer';
 import Dropdown from '@components/common/Dropdown';
 import TextInput from '@components/common/inputs/TextInput';
-import CustomButton from '@components/common/CustomButton'
+import CustomButton from '@components/common/CustomButton';
+import Alert from '@components/common/alerts/Alert'; 
 import { useTranslation } from 'react-i18next';
+import aulasService from '@services/aulasService';
+import { 
+  professorsOptions, 
+  subjectsOptions, 
+  timeSlotOptions, 
+  sedesOptions, 
+  classTypesOptions,
+  sedesMap 
+} from '@data/staticData';
 
 const ClassroomAssignmentForm = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -28,39 +38,78 @@ const ClassroomAssignmentForm = () => {
     timeSlot: ''
   });
 
-  const professorsOptions = [
-    { value: 'juan_perez', label: 'Dr. Juan Pérez' },
-    { value: 'maria_gonzalez', label: 'Dra. María González' },
-    { value: 'carlos_rodriguez', label: 'Ing. Carlos Rodríguez' }
-  ];
+  // Estados para las aulas desde la API
+  const [aulasList, setAulasList] = useState([]);
+  const [aulasOptions, setAulasOptions] = useState([]);
+  const [loadingAulas, setLoadingAulas] = useState(false);
+  const [selectedAulaInfo, setSelectedAulaInfo] = useState(null);
 
-  const sedesOptions = [
-    { value: '3d2', label: '3D2' },
-    { value: 'sede_principal', label: 'Sede Principal' },
-    { value: 'sede_norte', label: 'Sede Norte' }
-  ];
+  // Estados para las alertas
+  const [alert, setAlert] = useState({
+    show: false,
+    type: 'info',
+    message: ''
+  });
 
-  const classTypesOptions = [
-    { value: 'teorica', label: 'Teórica' },
-    { value: 'practica', label: 'Práctica' },
-    { value: 'laboratorio', label: 'Laboratorio' }
-  ];
+  // Cargar aulas al montar el componente
+  useEffect(() => {
+    loadAulas();
+  }, []);
 
-  const subjectsOptions = [
-    { value: 'ingenieria_software_iv', label: 'Ingeniería de Software IV' },
-    { value: 'bases_datos', label: 'Bases de Datos' },
-    { value: 'programacion_web', label: 'Programación Web' }
-  ];
+  // Cargar aulas filtradas cuando cambia la sede o tipo de clase
+  useEffect(() => {
+    if (formValues.sede || formValues.classType) {
+      filterAulasByCriteria();
+    }
+  }, [formValues.sede, formValues.classType, aulasList]);
 
-  const timeSlotOptions = [
-    { value: '7:00-9:00', label: '7:00 a.m - 9:00 a.m' },
-    { value: '9:00-11:00', label: '9:00 a.m - 11:00 a.m' },
-    { value: '11:00-13:00', label: '11:00 a.m - 1:00 p.m' },
-    { value: '13:00-15:00', label: '1:00 p.m - 3:00 p.m' },
-    { value: '15:00-17:00', label: '3:00 p.m - 5:00 p.m' },
-    { value: '17:00-19:00', label: '5:00 p.m - 7:00 p.m' },
-    { value: '19:00-21:00', label: '7:00 p.m - 9:00 p.m' }
-  ];
+  const loadAulas = async () => {
+    setLoadingAulas(true);
+    try {
+      const aulas = await aulasService.getAllAulas();
+      setAulasList(aulas);
+      const aulasFormatted = aulasService.formatAulasForDropdown(aulas);
+      setAulasOptions(aulasFormatted);
+    } catch (error) {
+      setAlert({
+        show: true,
+        type: 'error',
+        message: t('classroomAssignment.errorLoadingAulas', 'Error al cargar las aulas')
+      });
+    } finally {
+      setLoadingAulas(false);
+    }
+  };
+
+  const filterAulasByCriteria = async () => {
+    try {
+      let filteredAulas = aulasList.filter(aula => aula.estado === 'LIBRE');
+
+      // Filtrar por sede si está seleccionada
+      if (formValues.sede) {
+        filteredAulas = filteredAulas.filter(aula => aula.sedeId === formValues.sede);
+      }
+
+      // Filtrar por tipo de clase si está seleccionado
+      if (formValues.classType) {
+        filteredAulas = filteredAulas.filter(aula => aula.tipo === formValues.classType);
+      }
+
+      const aulasFormatted = aulasService.formatAulasForDropdown(filteredAulas);
+      setAulasOptions(aulasFormatted);
+
+      // Limpiar selección de aula si ya no está disponible
+      if (formValues.classroom) {
+        const isAulaStillAvailable = aulasFormatted.some(aula => aula.value === formValues.classroom);
+        if (!isAulaStillAvailable) {
+          setFormValues(prev => ({ ...prev, classroom: '' }));
+          setSelectedAulaInfo(null);
+        }
+      }
+    } catch (error) {
+      console.error('Error filtering aulas:', error);
+    }
+  };
 
   const initialValues = {
     professor: '',
@@ -77,6 +126,7 @@ const ClassroomAssignmentForm = () => {
     capacity: Yup.number()
       .required(t('validation.capacityRequired'))
       .positive(t('validation.capacityPositive'))
+      .typeError(t('validation.capacityMustBeNumber'))
       .integer(t('validation.capacityInteger')),
     sede: Yup.string().required(t('validation.sedeRequired')),
     classroom: Yup.string().required(t('validation.classroomRequired')),
@@ -89,28 +139,110 @@ const ClassroomAssignmentForm = () => {
     if (newTask.trim()) {
       console.log('Adding new TIC material:', newTask);
       setNewTask('');
+      setAlert({
+        show: true,
+        type: 'success',
+        message: t('classroomAssignment.ticMaterialAdded', 'Material TIC agregado correctamente')
+      });
+    } else {
+      setAlert({
+        show: true,
+        type: 'warning',
+        message: t('classroomAssignment.enterValidTask', 'Por favor ingrese un material TIC válido')
+      });
     }
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
+    // Validar campos usando 'values' de Formik
+    const requiredFields = [
+      { field: 'professor', message: t('validation.professorRequired', 'El profesor es requerido') },
+      { field: 'capacity', message: t('validation.capacityRequired', 'La capacidad es requerida') },
+      { field: 'sede', message: t('validation.sedeRequired', 'La sede es requerida') },
+      { field: 'classroom', message: t('validation.classroomRequired', 'El aula es requerida') },
+      { field: 'subject', message: t('validation.subjectRequired', 'La materia es requerida') },
+      { field: 'classType', message: t('validation.classTypeRequired', 'El tipo de clase es requerido') },
+      { field: 'timeSlot', message: t('validation.timeSlotRequired', 'El horario es requerido') }
+    ];
+
+    const emptyFields = [];
+    
+    requiredFields.forEach(({ field, message }) => {
+      if (!values[field] || values[field].toString().trim() === '') {
+        emptyFields.push(message);
+      }
+    });
+
+    // Validar capacidad como número positivo
+    if (values.capacity && (isNaN(values.capacity) || parseInt(values.capacity) <= 0)) {
+      emptyFields.push(t('validation.capacityPositive', 'La capacidad debe ser un número positivo'));
+    }
+
+    // Validar capacidad contra la capacidad del aula seleccionada
+    if (selectedAulaInfo && values.capacity && parseInt(values.capacity) > selectedAulaInfo.capacidad) {
+      emptyFields.push(t('validation.capacityExceedsAula', `La capacidad solicitada (${values.capacity}) excede la capacidad del aula (${selectedAulaInfo.capacidad})`));
+    }
+
+    // Validar que al menos un recurso TIC esté seleccionado
+    const hasSelectedResource = ticMaterials.videobeam || ticMaterials.airConditioning;
+    if (!hasSelectedResource) {
+      emptyFields.push(t('validation.ticResourceRequired', 'Debe seleccionar al menos un recurso TIC'));
+    }
+
+    if (emptyFields.length > 0) {
+      setAlert({
+        show: true,
+        type: 'error',
+        message: `${t('validation.missingFields', 'Faltan campos por rellenar')}: ${emptyFields.join(', ')}`
+      });
+      setSubmitting(false);
+      return;
+    }
+
+    // Si todos los campos están completos, proceder con el envío
     const assignmentData = {
       ...values,
       date: selectedDate,
       ticMaterials,
-      newTask
+      newTask,
+      aulaInfo: selectedAulaInfo
     };
+    
     console.log('Assignment data:', assignmentData);
-    alert(t('classroomAssignment.assignmentCreated'));
+    
+    setAlert({
+      show: true,
+      type: 'success',
+      message: t('classroomAssignment.assignmentCreated', 'Asignación de aula creada correctamente')
+    });
+    
     setSubmitting(false);
   };
 
   const handleFormChange = (values) => {
     setFormValues(values);
+    
+    // Actualizar información del aula seleccionada
+    if (values.classroom) {
+      const selectedAula = aulasList.find(aula => aula.id === values.classroom);
+      setSelectedAulaInfo(selectedAula);
+    } else {
+      setSelectedAulaInfo(null);
+    }
   };
 
   const getLabelByValue = (options, value) => {
     const option = options.find(opt => opt.value === value);
     return option ? option.label : '';
+  };
+
+  // Función para cerrar la alerta
+  const handleCloseAlert = () => {
+    setAlert({
+      show: false,
+      type: 'info',
+      message: ''
+    });
   };
 
   return (
@@ -193,12 +325,14 @@ const ClassroomAssignmentForm = () => {
 
                 {/* Tercera fila - 2 campos con altura uniforme */}
                 <div className="grid grid-cols-2 gap-4 mb-1">
-                  <TextInput 
+                  <Dropdown 
                     name="classroom" 
                     label={t('classroomAssignment.classroom')} 
-                    placeholder={t('classroomAssignment.classroomPlaceholder')} 
-                    inputClassName="w-full h-12 bg-principal_container border-purple_border text-gray_input_text placeholder-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm" 
-                    className="w-full text-white [&>label]:text-white" 
+                    options={aulasOptions}
+                    placeholderOption={loadingAulas ? 'Cargando aulas...' : t('classroomAssignment.classroomPlaceholder')} 
+                    selectClassName="w-full h-12 bg-principal_purple border-purple_border text-gray_input_text focus:ring-indigo-500 px-3 py-1 text-sm" 
+                    className="w-full text-white" 
+                    disabled={loadingAulas}
                   />
                   <Dropdown
                     name="subject" 
@@ -222,17 +356,35 @@ const ClassroomAssignmentForm = () => {
                   />
                 </div>
 
+                {/* Información del aula seleccionada */}
+                {selectedAulaInfo && (
+                  <div className="mb-4 p-3 bg-indigo-800 rounded-lg">
+                    <h4 className="text-sm font-medium text-white mb-2">Información del Aula:</h4>
+                    <div className="grid grid-cols-2 gap-2 text-xs text-indigo-200">
+                      <span>Capacidad: {selectedAulaInfo.capacidad} estudiantes</span>
+                      <span>Tipo: {selectedAulaInfo.tipo}</span>
+                      <span>Sede: {sedesMap[selectedAulaInfo.sedeId]}</span>
+                      <span>Estado: {selectedAulaInfo.descripcionEstado}</span>
+                    </div>
+                  </div>
+                )}
+
                 {/* Material TIC */}
                 <div className="mb-6">
                   <div className="bg-indigo-800 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-3">
-                      <h4 className="font-medium text-base">{t('classroomAssignment.ticMaterial')}</h4>
+                      <h4 className="font-medium text-base">
+                        {t('classroomAssignment.ticMaterial')}
+                        <span className="text-red-400 ml-1">*</span>
+                      </h4>
                       <button type="button" className="text-indigo-300 text-sm hover:text-white underline">
                         {t('classroomAssignment.view')}
                       </button>
                     </div>
                     <div className="grid grid-cols-2 gap-3 mb-3">
-                      <label className="flex items-center p-2 bg-indigo-700 rounded-lg hover:bg-indigo-600 cursor-pointer">
+                      <label className={`flex items-center p-2 rounded-lg cursor-pointer transition-colors ${
+                        ticMaterials.videobeam ? 'bg-indigo-600' : 'bg-indigo-700 hover:bg-indigo-600'
+                      }`}>
                         <input 
                           type="checkbox" 
                           checked={ticMaterials.videobeam} 
@@ -242,7 +394,9 @@ const ClassroomAssignmentForm = () => {
                         <Monitor className="w-4 h-4 mr-2 text-indigo-300" />
                         <span className="text-sm font-medium">{t('classroomAssignment.videobeam')}</span>
                       </label>
-                      <label className="flex items-center p-2 bg-indigo-700 rounded-lg hover:bg-indigo-600 cursor-pointer">
+                      <label className={`flex items-center p-2 rounded-lg cursor-pointer transition-colors ${
+                        ticMaterials.airConditioning ? 'bg-indigo-600' : 'bg-indigo-700 hover:bg-indigo-600'
+                      }`}>
                         <input 
                           type="checkbox" 
                           checked={ticMaterials.airConditioning} 
@@ -303,7 +457,10 @@ const ClassroomAssignmentForm = () => {
                   <span>{formValues.professor ? getLabelByValue(professorsOptions, formValues.professor) : t('classroomAssignment.professorToAssign')}</span>
                 </div>
                 <p className="text-sm text-gray-600 mb-1">{formValues.sede ? getLabelByValue(sedesOptions, formValues.sede) : t('classroomAssignment.sedeToAssign')}</p>
-                <p className="text-sm text-gray-600 mb-1">{formValues.classroom || t('classroomAssignment.classroomToAssign')}</p>
+                <p className="text-sm text-gray-600 mb-1">
+                  {selectedAulaInfo ? selectedAulaInfo.nombre : t('classroomAssignment.classroomToAssign')}
+                  {selectedAulaInfo && ` (Cap: ${selectedAulaInfo.capacidad})`}
+                </p>
                 <p className="text-sm text-gray-600 mb-1">{formValues.subject ? getLabelByValue(subjectsOptions, formValues.subject) : t('classroomAssignment.subjectToAssign')}</p>
                 <p className="text-sm text-gray-600 mb-1">{formValues.capacity ? `${t('classroomAssignment.capacity')}: ${formValues.capacity}` : t('classroomAssignment.capacityToDefine')}</p>
                 <p className="text-sm text-gray-600">{formValues.classType ? getLabelByValue(classTypesOptions, formValues.classType) : t('classroomAssignment.classTypeToDefine')}</p>
@@ -334,6 +491,15 @@ const ClassroomAssignmentForm = () => {
           </div>
         </div>
       </div>
+
+      {/* Componente Alert */}
+      {alert.show && (
+        <Alert
+          type={alert.type}
+          message={alert.message}
+          onConfirm={handleCloseAlert}
+        />
+      )}
     </div>
   );
 };

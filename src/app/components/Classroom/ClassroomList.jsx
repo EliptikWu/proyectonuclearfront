@@ -24,7 +24,7 @@ export default function ClassroomList() {
           <input
             type="text"
             placeholder="Buscar por número de aula..."
-            className="border border-gray-300 rounded-lg px-4 py-2 text-sm w-full md:w-1/2 focus:outline-none focus:ring-2 focus:ring-[var(--color-blue_button_login)]"
+            className="text-gray_input_text border border-gray-300 rounded-lg px-4 py-2 text-sm w-full md:w-1/2 focus:outline-none focus:ring-2 focus:ring-[var(--color-blue_button_login)]"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />

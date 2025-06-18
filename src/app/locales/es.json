@@ -205,6 +205,8 @@
     "classroomRequired": "Salón es requerido",
     "subjectRequired": "Materia es requerida",
     "classTypeRequired": "Tipo de aula es requerido",
-    "timeSlotRequired": "Horario es requerido"
+    "timeSlotRequired": "Horario es requerido",
+    "capacityMustBeNumber": "La capacidad debe ser un número válido",
+    "classTypeFormat": "El formato debe ser AULA-XXX (ejemplo: AULA-101)"
   }
 }

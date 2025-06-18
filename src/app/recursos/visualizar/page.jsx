@@ -1,9 +1,9 @@
 "use client";
-import RecursosHeader from "@/components/resources/RecursosHeader";
-import RecursosCard from "@/components/resources/RecursosCard";
+import RecursosHeader from "@components/resources/RecursosHeader";
+import RecursosCard from "@components/resources/RecursosCard";
 import recursos from "../../data/recursos.js"; // Corrección de la ruta
 import { useState } from "react";
-import Header from "@/components/common/Navbar";
+import Header from "@components/common/Navbar";
 
 export default function RecursosPage() {
   const [searchQuery, setSearchQuery] = useState("");

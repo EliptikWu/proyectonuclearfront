@@ -1,10 +1,10 @@
 import { apiRequest, API_ENDPOINTS } from '../config/apiConfig';
 
 class aulasService {
-  // Obtener todas las aulas
   async getAllAulas() {
     try {
-      const data = await apiRequest(API_ENDPOINTS.AULAS.GET_ALL);
+      // En Next.js usamos la ruta API local que creamos
+      const data = await apiRequest('/aulas');
       return data;
     } catch (error) {
       console.error('Error fetching aulas:', error);

@@ -9,10 +9,19 @@ import Dropdown from '@components/common/DropDown';
 import TextInput from '@components/common/inputs/TextInput';
 import CustomButton from '@components/common/CustomButton'
 import { useTranslation } from 'react-i18next';
+import { useRouter } from "next/navigation";
+
 
 const EditClassroomAssignmentForm = ({ assignmentData, onUpdate, onCancel }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { t } = useTranslation();
+  
+  const router = useRouter();
+
+  const handleCancel = () => {
+    router.back(); // Vuelve a la página anterior
+  };
+
   const [ticMaterials, setTicMaterials] = useState({
     videobeam: false,
     airConditioning: false
@@ -137,12 +146,6 @@ const EditClassroomAssignmentForm = ({ assignmentData, onUpdate, onCancel }) => 
     setFormValues(values);
   };
 
-  const handleCancel = () => {
-    if (onCancel) {
-      onCancel();
-    }
-  };
-
   const getLabelByValue = (options, value) => {
     const option = options.find(opt => opt.value === value);
     return option ? option.label : '';
@@ -153,8 +156,13 @@ const EditClassroomAssignmentForm = ({ assignmentData, onUpdate, onCancel }) => 
       <Navbar />
       <div className="px-12 pt-6">
         <div className="flex items-center">
-          <ChevronLeft className="w-6 h-6 text-black_text mr-2 cursor-pointer" onClick={handleCancel} />
-          <h1 className="text-2xl font-bold text-black_text">{t('classroomAssignment.editTitle') || 'Editar Asignación de Aula'}</h1>
+          <ChevronLeft
+            className="w-6 h-6 text-black_text mr-2 cursor-pointer"
+            onClick={handleCancel}
+          />
+          <h1 className="text-2xl font-bold text-black_text">
+            {t('classroomAssignment.editTitle') || 'Editar Asignación de Aula'}
+          </h1>
         </div>
       </div>
       <div className="flex gap-16 px-12 py-6">

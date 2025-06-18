@@ -18,25 +18,30 @@ export default function ClassroomHeader({ searchQuery, setSearchQuery }) {
           placeholder="Buscar por número de aula..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="[&>label]:text-black mt-2 md:mt-0 w-full md:w-[300px] border border-gray-400 rounded-md px-4 py-2 text-sm shadow-sm bg-white text-black placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-[var(--color-principal_purple)]"
+          className="text-gray_input_text mt-2 md:mt-0 w-full md:w-[300px] border border-gray-400 rounded-md px-4 py-2 text-sm shadow-sm bg-white placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-[var(--color-principal_purple)]"
         />
       </div>
 
       {/* Botones */}
       <div className="flex gap-3 justify-end">
-        <button className="bg-[var(--color-blue_button_login)] hover:bg-[var(--color-blue_button_login_hover)] text-white text-sm px-4 py-2 rounded-md">
+        <button className="bg-[var(--color-blue_button_login)] hover:bg-[var(--color-blue_button_login_hover)] text-white text-sm px-4 py-2 rounded-md"
+        onClick={() => router.push("/aulas/crear")}>
           {t("classrooms.create")}
+          
         </button>
 
         <button
           className="bg-[var(--color-principal_purple)] hover:bg-purple-900 text-white text-sm px-4 py-2 rounded-md"
-          onClick={() => router.push("/recursos")}
+          onClick={() => router.push("/recursos/visualizar")}
         >
           Recursos TIC
         </button>
-        <button className="bg-[var(--color-principal_purple)] hover:bg-purple-900 text-white text-sm px-4 py-2 rounded-md">
-          Auditoria
-        </button>
+          <button
+            className="bg-[var(--color-principal_purple)] hover:bg-purple-900 text-white text-sm px-4 py-2 rounded-md"
+            onClick={() => router.push("/auditoria")}
+          >
+            Auditoría
+          </button>
       </div>
     </div>
   );

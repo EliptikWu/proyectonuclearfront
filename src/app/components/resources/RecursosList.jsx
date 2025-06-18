@@ -10,9 +10,14 @@ export default function RecursosList() {
   const [search, setSearch] = useState("");
   const router = useRouter();
 
-  const filteredRecursos = recursos.filter((item) =>
-    item.nombre?.toLowerCase().includes(search.toLowerCase())
+const filteredRecursos = recursos.filter((item) => {
+  const searchLower = search.toLowerCase();
+
+  return (
+    item.nombre?.toLowerCase().includes(searchLower) ||
+    item.cantidad?.toString().includes(searchLower) 
   );
+});
 
   return (
     <section className="p-6">
@@ -25,7 +30,7 @@ export default function RecursosList() {
           </h2>
           <input
             type="text"
-            placeholder="Buscar recurso..."
+            placeholder="Buscar por nombre, descripción, ID o cantidad..."
             className="border border-gray-300 rounded-lg px-4 py-2 text-sm w-full md:w-1/2 focus:outline-none focus:ring-2 focus:ring-[var(--color-blue_button_login)] bg-white text-black placeholder-gray-400"
             value={search}
             onChange={(e) => setSearch(e.target.value)}

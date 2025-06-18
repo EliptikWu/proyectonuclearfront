@@ -2,6 +2,7 @@
   "name": "proyectonuclearfront",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://back-aulas-production.up.railway.app",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

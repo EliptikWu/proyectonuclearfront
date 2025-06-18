@@ -40,10 +40,10 @@ const EditarRecursos = () => {
         const data = await response.json();
 
         setInitialValues({
-          nombreTic: data.nombre,
-          descripcion: data.descripcion,
+          nombreTic: data.nombre || '',
+          descripcion: data.descripcion || '',
           disponible: data.estado?.toLowerCase() === 'disponible' ? 'si' : 'no',
-          cantidad: data.cantidad,
+          cantidad: data.cantidad || 1,
         });
       } catch (error) {
         console.error(error);
@@ -97,7 +97,8 @@ const EditarRecursos = () => {
     setAlert({ show: false, type: '', message: '' });
   };
 
-  if (loading) {
+  // Mientras carga
+  if (loading || !initialValues) {
     return <p className="text-center py-12 text-gray-600">Cargando recurso...</p>;
   }
 

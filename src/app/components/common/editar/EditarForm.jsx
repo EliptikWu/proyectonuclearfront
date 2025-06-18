@@ -89,7 +89,9 @@ const EditClassroomAssignmentForm = ({ assignmentData, onUpdate, onCancel }) => 
       .positive(t('validation.capacityPositive'))
       .integer(t('validation.capacityInteger')),
     sede: Yup.string().required(t('validation.sedeRequired')),
-    classroom: Yup.string().required(t('validation.classroomRequired')),
+    classroom: Yup.string()
+          .required(t('validation.classroomRequired', 'El aula es requerida'))
+          .matches(/^AULA-\d{3}$/, t('validation.classroomFormat', 'El formato del aula debe ser AULA-XXX')),
     subject: Yup.string().required(t('validation.subjectRequired')),
     classType: Yup.string().required(t('validation.classTypeRequired')),
     timeSlot: Yup.string().required(t('validation.timeSlotRequired')),

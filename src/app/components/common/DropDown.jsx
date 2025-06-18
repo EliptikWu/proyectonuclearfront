@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 import { useField } from 'formik';
 
-const BaseInput = ({
+const Dropdown = ({
   name,
   label,
+  options,
   className = '',
-  inputClassName = '',
+  selectClassName = '',
   errorClassName = '',
+  placeholderOption = 'Selecciona una opción',
   ...props
 }) => {
   const [field, meta] = useField(name);
@@ -14,25 +16,31 @@ const BaseInput = ({
   return (
     <div className={`w-full ${className}`}>
       {label && (
-        <label
-          htmlFor={name}
+        <label 
+          htmlFor={name} 
           className="block mb-2 text-sm font-medium text-black"
         >
           {label}
         </label>
       )}
-
-      <input
+      
+      <select
         id={name}
         {...field}
         {...props}
-        className={`w-full h-12 border border-gray-300 rounded-lg px-3 py-2 text-sm
-          placeholder-opacity-100 focus:placeholder-opacity-0
+        className={`w-full h-12 border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white
           focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200
           ${meta.touched && meta.error ? 'border-red-500' : 'border-gray-300'}
-          ${inputClassName}`}
-      />
-
+          ${selectClassName}`}
+      >
+        <option value="">{placeholderOption}</option>
+        {options.map(({ value, label }) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
+      </select>
+      
       {/* Contenedor fijo para el error que siempre ocupa espacio */}
       <div className="h-5 mt-1">
         {meta.touched && meta.error && (
@@ -45,12 +53,19 @@ const BaseInput = ({
   );
 };
 
-BaseInput.propTypes = {
+Dropdown.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   className: PropTypes.string,
-  inputClassName: PropTypes.string,
+  selectClassName: PropTypes.string,
   errorClassName: PropTypes.string,
+  placeholderOption: PropTypes.string,
 };
 
-export default BaseInput;
+export default Dropdown;

@@ -1,5 +1,5 @@
 "use client";
-import recursos from "@/data/recursos";
+import recursos from "@data/recursos";
 import RecursosCard from "./RecursosCard";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";

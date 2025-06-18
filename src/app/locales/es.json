@@ -28,19 +28,29 @@
   "classrooms": {
     "title": "Aulas disponibles",
     "create": "Crear aula",
-  "sites": {
-    "main": "Sede Principal",
-    "alcazar": "Sede Alcázar"
+    "sites": {
+      "main": "Sede Principal",
+      "alcazar": "Sede Alcázar"
+    },
+    "resources": {
+      "projector": "Proyector",
+      "projectorSmartBoard": "Proyector y tablero digital",
+      "computersProjector": "Computadores y proyector"
+    },
+    "capacity": "{{count}} estudiantes",
+    "room": "Aula {{room}}",
+    "details": "Ver detalles"
   },
-  "resources": {
-    "projector": "Proyector",
-    "projectorSmartBoard": "Proyector y tablero digital",
-    "computersProjector": "Computadores y proyector"
+  "recursos": {
+    "title": "Recursos disponibles",
+    "create": "Crear recurso",
+    "estado": "Estado",
+    "cantidad": "Cantidad",
+    "descripcion": "Descripción",
+    "noResultados": "No se encontraron recursos",
+    "buscarPlaceholder": "Buscar recurso...",
+    "botonTIC": "Recursos TIC"
   },
-  "capacity": "{{count}} estudiantes",
-  "room": "Aula {{room}}",
-  "details": "Ver detalles"
-},
   "alerts": {
     "titleLogin": "Error de inicio de sesión",
     "sessionExpired": "Tu sesión ha caducado, por favor vuelve a iniciar sesión",
@@ -195,7 +205,6 @@
     "noTicMaterial": "Sin material TIC seleccionado",
     "assignmentCreated": "Asignación creada exitosamente"
   },
-
   "validation": {
     "professorRequired": "Profesor es requerido",
     "capacityRequired": "Capacidad es requerida",

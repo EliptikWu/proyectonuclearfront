@@ -1,8 +1,10 @@
 "use client";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/navigation";
 
 export default function ClassroomHeader({ searchQuery, setSearchQuery }) {
   const { t } = useTranslation();
+  const router = useRouter();
 
   return (
     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
@@ -12,11 +14,11 @@ export default function ClassroomHeader({ searchQuery, setSearchQuery }) {
           {t("classrooms.title")}
         </h2>
         <input
-            type="text"
-            placeholder="Buscar por número de aula..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="[&>label]:text-black mt-2 md:mt-0 w-full md:w-[300px] border border-gray-400 rounded-md px-4 py-2 text-sm shadow-sm bg-white text-black placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-[var(--color-principal_purple)]"      
+          type="text"
+          placeholder="Buscar por número de aula..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="[&>label]:text-black mt-2 md:mt-0 w-full md:w-[300px] border border-gray-400 rounded-md px-4 py-2 text-sm shadow-sm bg-white text-black placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-[var(--color-principal_purple)]"
         />
       </div>
 
@@ -26,8 +28,14 @@ export default function ClassroomHeader({ searchQuery, setSearchQuery }) {
           {t("classrooms.create")}
         </button>
 
-        <button className="bg-[var(--color-principal_purple)] hover:bg-purple-900 text-white text-sm px-4 py-2 rounded-md">
+        <button
+          className="bg-[var(--color-principal_purple)] hover:bg-purple-900 text-white text-sm px-4 py-2 rounded-md"
+          onClick={() => router.push("/recursos")}
+        >
           Recursos TIC
+        </button>
+        <button className="bg-[var(--color-principal_purple)] hover:bg-purple-900 text-white text-sm px-4 py-2 rounded-md">
+          Auditoria
         </button>
       </div>
     </div>

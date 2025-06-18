@@ -3,10 +3,12 @@ import classrooms from "../../data/classrooms";
 import ClassroomCard from "./ClassroomCard";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ClassroomList() {
   const { t } = useTranslation();
   const [search, setSearch] = useState("");
+  const router = useRouter();
 
   const filteredClassrooms = classrooms.filter((classroom) =>
     classroom.room.toString().includes(search)
@@ -32,10 +34,16 @@ export default function ClassroomList() {
 
         {/* Botones */}
         <div className="flex gap-2 justify-end w-full md:w-auto">
-          <button className="px-4 py-2 rounded-lg bg-[var(--color-blue_button_login)] text-white text-sm font-medium hover:bg-[var(--color-blue_button_login_hover)] transition">
+          <button
+            className="px-4 py-2 rounded-lg bg-[var(--color-blue_button_login)] text-white text-sm font-medium hover:bg-[var(--color-blue_button_login_hover)] transition"
+            onClick={() => router.push("/recursos")}
+          >
             Recursos TIC
           </button>
-          <button className="px-4 py-2 rounded-lg bg-[var(--color-blue_button_login)] text-white text-sm font-medium hover:bg-[var(--color-blue_button_login_hover)] transition">
+          <button
+            className="px-4 py-2 rounded-lg bg-[var(--color-blue_button_login)] text-white text-sm font-medium hover:bg-[var(--color-blue_button_login_hover)] transition"
+            onClick={() => router.push("/aulas/visualizar")}
+          >
             {t("classrooms.create")}
           </button>
         </div>

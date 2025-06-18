@@ -1,10 +1,15 @@
-"use client";
+'use client';
 import '../../i18n';
-
+import { Suspense } from 'react';
 import Header from '@components/common/Navbar';
-import EditarRecursos from '@components/resources/EditarRecursos';
 import Alert from '@components/common/alerts/Alert';
 import PropTypes from 'prop-types';
+import dynamic from 'next/dynamic';
+
+const LazyEditarRecursos = dynamic(() => import('@components/resources/EditarRecursos'), {
+  ssr: false,
+  loading: () => <div className="text-center py-8">Cargando editor...</div>
+});
 
 const PageEditarRecurso = ({ alert = null, handleSubmit = () => {} }) => {
   return (
@@ -12,7 +17,9 @@ const PageEditarRecurso = ({ alert = null, handleSubmit = () => {} }) => {
       <Header />
       <main className="flex-grow">
         {alert && <Alert type={alert.type} message={alert.message} />}
-        <EditarRecursos onSubmit={handleSubmit} alert={alert} />
+        <Suspense fallback={<div className="text-center py-8">Cargando recursos...</div>}>
+          <LazyEditarRecursos onSubmit={handleSubmit} alert={alert} />
+        </Suspense>
       </main>
     </div>
   );

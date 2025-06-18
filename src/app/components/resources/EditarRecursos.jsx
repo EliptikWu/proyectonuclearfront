@@ -6,7 +6,7 @@ import { ChevronLeft } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import TextInput from '@components/common/inputs/TextInput';
-import Dropdown from '@components/common/Dropdown';
+import Dropdown from '@/components/common/Dropdown';
 import FormContainer from '@components/common/FormContainer';
 import CustomButton from '@components/common/CustomButton';
 import Alert from '@components/common/alerts/Alert';

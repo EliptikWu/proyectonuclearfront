@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import * as Yup from 'yup';
 import { ChevronLeft } from 'lucide-react';
@@ -8,6 +9,8 @@ import Dropdown from '@components/common/Dropdown';
 import FormContainer from '@components/common/FormContainer';
 import CustomButton from '@components/common/CustomButton';
 import Alert from '@components/common/alerts/Alert';
+
+import { createRecurso } from '@/services/recursosService'; // 👈 Asegúrate que esta función exista
 
 const CrearRecursos = ({ alert = null, onSubmit = () => {} }) => {
   const router = useRouter();
@@ -31,14 +34,35 @@ const CrearRecursos = ({ alert = null, onSubmit = () => {} }) => {
   });
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    console.log('Datos enviados:', values);
-    setLocalAlert({
-      show: true,
-      type: 'success',
-      message: 'Material TIC registrado correctamente',
-    });
-    onSubmit(values);
-    setSubmitting(false);
+    try {
+      const payload = {
+        nombre: values.nombreTic,
+        descripcion: values.descripcion,
+        estado: values.disponible.toLowerCase() === 'si' ? 'DISPONIBLE' : 'NO DISPONIBLE',
+        cantidad: parseInt(values.cantidad),
+      };
+
+      const creado = await createRecurso(payload); // ✅ Se envía al backend
+      console.log('✅ Recurso creado:', creado);
+
+      setLocalAlert({
+        show: true,
+        type: 'success',
+        message: 'Material TIC registrado correctamente',
+      });
+
+      onSubmit(payload); // Si necesitas hacer algo más arriba
+      setTimeout(() => router.push('/recursos/visualizar'), 1500); // redirección
+    } catch (error) {
+      console.error('❌ Error al crear recurso:', error);
+      setLocalAlert({
+        show: true,
+        type: 'error',
+        message: 'Error al registrar el Material TIC',
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleCloseAlert = () => {
@@ -47,16 +71,14 @@ const CrearRecursos = ({ alert = null, onSubmit = () => {} }) => {
 
   return (
     <div className="min-h-screen w-full bg-principal_container">
-      {/* Encabezado con ícono y título */}
       <div className="flex items-center mb-6 px-12 py-8">
         <ChevronLeft
-        className="w-6 h-6 text-black_text mr-2 cursor-pointer"
-        onClick={() => router.push('/recursos/visualizar')}
+          className="w-6 h-6 text-black_text mr-2 cursor-pointer"
+          onClick={() => router.push('/recursos/visualizar')}
         />
         <h2 className="text-2xl font-bold text-gray-800">Registrar Material TIC</h2>
       </div>
 
-      {/* Formulario */}
       <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <FormContainer
           initialValues={initialValues}

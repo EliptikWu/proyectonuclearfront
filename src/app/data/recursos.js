@@ -4,7 +4,7 @@ const recursos = [
     nombre: "Proyector",
     descripcion: "Proyector HD con entrada HDMI",
     estado: null,
-    cantidad: 5,
+    cantidad: 1,
   },
   {
     id: "68314bc9ed6f8c20deb7be36",
@@ -18,7 +18,7 @@ const recursos = [
     nombre: "Proyector",
     descripcion: "Proyector HD para presentaciones",
     estado: "DISPONIBLE",
-    cantidad: 3,
+    cantidad: 1,
   },
 ];
 

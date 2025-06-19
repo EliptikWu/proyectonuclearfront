@@ -32,6 +32,10 @@
       "main": "Sede Principal",
       "alcazar": "Sede Alcázar"
     },
+    "status": {
+      "available": "Disponible",
+      "unavailable": "No disponible"
+    },
     "resources": {
       "projector": "Proyector",
       "projectorSmartBoard": "Proyector y tablero digital",
@@ -49,17 +53,26 @@
     "descripcion": "Descripción",
     "noResultados": "No se encontraron recursos",
     "buscarPlaceholder": "Buscar recurso...",
-    "botonTIC": "Recursos TIC"
+    "botonTIC": "Recursos TIC",
+    "noName": "Recurso sin nombre",
+    "noDescription": "Sin descripción",
+    "noState": "Sin estado"
   },
   "alerts": {
     "titleLogin": "Error de inicio de sesión",
     "sessionExpired": "Tu sesión ha caducado, por favor vuelve a iniciar sesión",
     "invalidToken": "Token inválido",
     "deleteRecurso": "¿Estás seguro de que deseas eliminar el recurso \"{{nombre}}\"?",
+    "deleteClassroom": "¿Estás seguro de que deseas eliminar el aula \"{{room}}\"?",
+    "toggleDisableClassroom": "¿Estás seguro de que deseas deshabilitar el aula \"{{room}}\"?",
+    "toggleEnableClassroom": "¿Estás seguro de que deseas habilitar el aula \"{{room}}\"?",
+    "toggleDisableRecurso": "¿Estás seguro de que deseas deshabilitar el recurso \"{{nombre}}\"?",
+    "toggleEnableRecurso": "¿Estás seguro de que deseas habilitar el recurso \"{{nombre}}\"?",
     "actions": {
       "understood": "Listo",
       "cancel": "Cancelar",
-      "confirmDelete": "Sí, eliminar"
+      "confirmDelete": "Sí, eliminar",
+      "confirmToggle": "Sí, cambiar estado"
     },
     "success": {
       "title": "Éxito"
@@ -72,8 +85,7 @@
     },
     "info": {
       "title": "Información"
-    },
-    "deleteClassroom": "¿Estás seguro de que deseas eliminar el aula \"{{room}}\"?"
+    }
   },
   "stripchat": {
     "earnings": {

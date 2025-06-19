@@ -1,50 +1,40 @@
-// src/config/apiConfig.js
-
-const BASE_URL = 'https://back-aulas-production.up.railway.app';
-
-const defaultHeaders = {
-  'Content-Type': 'application/json',
-  Accept: 'application/json',
-};
+// src/app/config/apiConfig.js
 
 export const apiRequest = async (url, options = {}) => {
   const config = {
-    method: options.method || 'GET',
+    method: options.method || "GET",
     headers: {
-      ...defaultHeaders,
+      "Content-Type": "application/json",
+      Accept: "application/json",
       ...(options.headers || {}),
     },
-    body: options.body ? JSON.stringify(options.body) : undefined,
   };
 
+  if (options.body) {
+    config.body = JSON.stringify(options.body);
+  }
+
   try {
-    const response = await fetch(`${BASE_URL}${url}`, config);
+    const response = await fetch(url, config);
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.message || `Error: ${response.status}`);
+      const errorText = await response.text();
+      throw new Error(`API error: ${response.status} - ${errorText}`);
     }
 
     return await response.json();
   } catch (error) {
-    console.error('API Request Error:', { url, error: error.message });
+    console.error("❌ API Request Error:", error);
     throw error;
   }
 };
 
 export const API_ENDPOINTS = {
   AULAS: {
-    GET_ALL: '/aulas',
-    GET_BY_ID: (id) => `/aulas/${id}`,
-    CREATE: '/aulas',
-    UPDATE: (id) => `/aulas/${id}`,
-    DELETE: (id) => `/aulas/${id}`,
-  },
-  RECURSOS: {
-    GET_ALL: '/recursos',
-    GET_BY_ID: (id) => `/recursos/${id}`,
-    CREATE: '/recursos',
-    UPDATE: (id) => `/recursos/${id}`,
-    DELETE: (id) => `/recursos/${id}`,
+    GET_ALL: "https://back-aulas-production.up.railway.app/aulas",
+    GET_BY_ID: (id) => `https://back-aulas-production.up.railway.app/aulas/${id}`,
+    CREATE: "https://back-aulas-production.up.railway.app/aulas",
+    UPDATE: (id) => `https://back-aulas-production.up.railway.app/aulas/${id}`,
+    DELETE: (id) => `https://back-aulas-production.up.railway.app/aulas/${id}`,
   },
 };

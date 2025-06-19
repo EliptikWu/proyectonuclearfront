@@ -2,7 +2,7 @@
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import FormContainer from '@components/common/FormContainer';
-import TextInput from '@components/common/inputs/TextInput';
+import TextInput from '@/app/components/common/inputs/TextInputFormik';
 import PasswordInput from '@components/common/inputs/PasswordInput';
 import CustomButton from '@components/common/CustomButton';
 import Logo from '@components/common/Logo';

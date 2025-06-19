@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import TextInput from '@components/common/inputs/TextInput';
+import TextInput from '@/app/components/common/inputs/TextInputFormik';
 import Dropdown from '@/app/components/common/inputs/Dropdown';
 import FormContainer from '@components/common/FormContainer';
 import CustomButton from '@components/common/CustomButton';

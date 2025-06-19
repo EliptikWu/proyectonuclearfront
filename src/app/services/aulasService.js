@@ -1,33 +1,34 @@
-import { apiRequest, API_ENDPOINTS } from '../config/apiConfig';
+// src/app/services/aulasService.js
+import axios from "axios";
 
-class AulasService {
-  getAllAulas() {
-    return apiRequest(API_ENDPOINTS.AULAS.GET_ALL);
-  }
+const API_URL = "/api/aulas";
 
-  getAulaById(id) {
-    return apiRequest(API_ENDPOINTS.AULAS.GET_BY_ID(id));
-  }
+export const getAllAulas = async () => {
+  const response = await axios.get(API_URL);
+  return response.data;
+};
 
-  createAula(data) {
-    return apiRequest(API_ENDPOINTS.AULAS.CREATE, {
-      method: 'POST',
-      body: data,
-    });
-  }
+export const getAulaById = async (id) => {
+  const response = await axios.get(`${API_URL}/${id}`);
+  return response.data;
+};
 
-  updateAula(id, data) {
-    return apiRequest(API_ENDPOINTS.AULAS.UPDATE(id), {
-      method: 'PUT',
-      body: data,
-    });
-  }
+export const createAula = async (aula) => {
+  const response = await axios.post(API_URL, aula);
+  return response.data;
+};
 
-  deleteAula(id) {
-    return apiRequest(API_ENDPOINTS.AULAS.DELETE(id), {
-      method: 'DELETE',
-    });
-  }
-}
+export const updateAula = async (id, aula) => {
+  const response = await axios.put(`${API_URL}/${id}`, aula);
+  return response.data;
+};
 
-export default new AulasService();
+export const deleteAula = async (id) => {
+  const response = await axios.delete(`${API_URL}/${id}`);
+  return response.data;
+};
+
+export const toggleEstadoAula = async (id) => {
+  const response = await axios.patch(`${API_URL}/${id}/estado`);
+  return response.data;
+};

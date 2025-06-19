@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import Navbar from '@components/common/Navbar';
 import FormContainer from '@components/common/FormContainer';
 import Dropdown from '@/app/components/common/inputs/Dropdown';
-import TextInput from '@components/common/inputs/TextInput';
+import TextInput from '@/app/components/common/inputs/TextInputFormik';
 import CustomButton from '@components/common/CustomButton'
 import { useTranslation } from 'react-i18next';
 import { useRouter } from "next/navigation";

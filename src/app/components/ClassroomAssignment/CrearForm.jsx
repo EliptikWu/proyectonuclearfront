@@ -1,3 +1,5 @@
+// components/CrearForm.jsx
+
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -11,7 +13,7 @@ import CustomButton from "@components/common/CustomButton";
 import Alert from "@components/common/alerts/Alert";
 
 import Dropdown from "@components/common/inputs/Dropdown";
-import TextInput from "@components/common/inputs/TextInput";
+import TextInput from "@/app/components/common/inputs/TextInputFormik";
 
 // Componentes modularizados
 import DatePickerSection from "@components/ClassroomAssignment/DatePickerSection";

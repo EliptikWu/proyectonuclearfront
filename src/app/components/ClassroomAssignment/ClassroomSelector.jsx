@@ -1,6 +1,6 @@
 import React from 'react';
 import Dropdown from '@/app/components/common/inputs/Dropdown';
-import TextInput from '@components/common/inputs/TextInput';
+import TextInput from '@/app/components/common/inputs/TextInputFormik';
 import { AlertCircle } from 'lucide-react';
 
 const ClassroomSelector = ({

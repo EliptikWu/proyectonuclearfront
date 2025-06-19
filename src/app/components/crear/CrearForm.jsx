@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import * as Yup from 'yup';
 import Navbar from '@components/common/Navbar';
 import FormContainer from '@components/common/FormContainer';
-import Dropdown from '@components/common/Dropdown';
+import Dropdown from '@/app/components/common/inputs/Dropdown';
 import TextInput from '@components/common/inputs/TextInput';
 import CustomButton from '@components/common/CustomButton';
 import Alert from '@components/common/alerts/Alert'; 

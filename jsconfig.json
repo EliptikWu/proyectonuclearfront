@@ -1,21 +1,22 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src/app",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@components/*": ["./components/*"],
-      "@utils/*": ["./utils/*"],
-      "@styles/*": ["./styles/*"],
-      "@assets/*": ["./assets/*"],
-      "@hooks/*": ["./hooks/*"],
-      "@services/*": ["./services/*"],
-      "@config/*": ["./config/*"],
-      "@pages/*": ["./pages/*"],
-      "@store/*": ["./store/*"],
-      "@locales/*": ["./locales/*"],
-      "@routes/*": ["./routes/*"],
-      "@data/*": ["./data/*"]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/app/components/*"],
+      "@utils/*": ["./src/app/utils/*"],
+      "@styles/*": ["./src/app/styles/*"],
+      "@assets/*": ["./src/app/assets/*"],
+      "@hooks/*": ["./src/app/hooks/*"],
+      "@services/*": ["./src/app/services/*"],
+      "@config/*": ["./src/app/config/*"],
+      "@pages/*": ["./src/app/pages/*"],
+      "@store/*": ["./src/app/store/*"],
+      "@locales/*": ["./src/app/locales/*"],
+      "@routes/*": ["./src/app/routes/*"],
+      "@data/*": ["./src/app/data/*"]
     }
   },
-  "include": ["src"]
-}
+  "include": ["src/**/*", "next-env.d.ts", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+} 

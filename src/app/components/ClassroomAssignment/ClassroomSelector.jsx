@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown from '@/app/components/common/inputs/Dropdown';
+import Dropdown from '@components/common/inputs/Dropdown';
 import TextInput from '@components/common/inputs/TextInput';
 import { AlertCircle } from 'lucide-react';
 

@@ -1,7 +1,7 @@
 "use client";
 import "@i18n/i18n";
 
-import EditarForm from '@/app/components/ClassroomAssignment/EditarForm';
+import EditarForm from '@components/ClassroomAssignment/EditarForm';
 import Alert from '@components/common/alerts/Alert';
 import PropTypes from 'prop-types';
 

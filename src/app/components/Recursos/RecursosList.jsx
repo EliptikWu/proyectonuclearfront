@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 import RecursosCard from "./RecursosCard";
-import { getRecursos, deleteRecurso } from "@/services/recursosService";
+import { getRecursos, deleteRecurso } from "@services/recursosService";
 
 export default function RecursosList() {
   const { t } = useTranslation();

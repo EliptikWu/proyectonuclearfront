@@ -1,4 +1,3 @@
-// components/TicMaterialSection.jsx
 import React from 'react';
 import { Monitor, Thermometer, Plus } from 'lucide-react';
 

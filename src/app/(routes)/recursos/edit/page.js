@@ -6,7 +6,7 @@ import Alert from '@components/common/alerts/Alert';
 import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
 
-const LazyEditarRecursos = dynamic(() => import('@/app/components/Recursos/EditarRecursos'), {
+const LazyEditarRecursos = dynamic(() => import('@components/Recursos/EditarRecursos'), {
   ssr: false,
   loading: () => <div className="text-center py-8">Cargando editor...</div>
 });

@@ -1,4 +1,5 @@
 import './globals.css';
+import './i18n/i18n'
 
 export const metadata = {
   title: 'Next.js',

@@ -38,3 +38,40 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.react-datepicker--static {
+  position: relative !important;
+  display: inline-block !important;
+  width: 100% !important;
+  transform-origin: top left;
+}
+
+.react-datepicker__month-container {
+  width: 100% !important;
+}
+
+.react-datepicker {
+  width: 100% !important;
+  font-size: 0.9rem !important; /* Tamaño de fuente mantenido */
+  border: none !important;
+}
+
+.react-datepicker__header {
+  background-color: #4F46E5 !important;
+  border-bottom: none !important;
+  padding: 0.5rem !important; /* Padding reducido */
+}
+
+.react-datepicker__day {
+  margin: 0.1rem !important; /* Espacio entre días reducido */
+  width: 1.8rem !important; /* Tamaño de día reducido */
+  line-height: 1.8rem !important;
+}
+
+.react-datepicker__current-month {
+  font-size: 0.9rem !important; /* Tamaño de fuente mantenido */
+}
+
+.react-datepicker__day-name {
+  width: 1.8rem !important; /* Tamaño de nombre de día reducido */
+  margin: 0.1rem !important;
+}

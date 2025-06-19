@@ -11,7 +11,7 @@ export default function Header() {
 
     const navLinks = [
         { href: "/", label: t("common.Home") },
-        { href: "/aulas/visualizar", label: t("common.Classroom") },
+        { href: "/aula/view", label: t("common.Classroom") },
         { href: "/usuarios", label: t("common.Users") },
         { href: "/automatizacion", label: t("common.automation") },
         { href: "/asignaturas", label: t("common.subjects") },

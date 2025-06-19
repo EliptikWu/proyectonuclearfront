@@ -18,7 +18,7 @@ export default function RecursosCard({ recursos, onDelete, onToggleStatus }) {
   };
 
   const handleEdit = () => {
-    router.push(`/recursos/editar?id=${recursos.id}`);
+    router.push(`/recursos/edit?id=${recursos.id}`);
   };
 
   const handleToggleStatusClick = () => {

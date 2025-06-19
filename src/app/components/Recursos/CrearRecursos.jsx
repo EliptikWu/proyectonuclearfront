@@ -5,12 +5,12 @@ import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 import TextInput from '@components/common/inputs/TextInput';
-import Dropdown from '@/app/components/common/inputs/Dropdown';
+import Dropdown from '@components/common/inputs/Dropdown';
 import FormContainer from '@components/common/FormContainer';
 import CustomButton from '@components/common/CustomButton';
 import Alert from '@components/common/alerts/Alert';
 
-import { createRecurso } from '@/services/recursosService'; // 👈 Asegúrate que esta función exista
+import { createRecurso } from '@services/recursosService'; // 👈 Asegúrate que esta función exista
 
 const CrearRecursos = ({ alert = null, onSubmit = () => {} }) => {
   const router = useRouter();

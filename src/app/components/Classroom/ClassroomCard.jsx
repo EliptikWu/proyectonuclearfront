@@ -36,7 +36,7 @@ export default function ClassroomCard({ classroom, onDelete, onToggle }) {
   };
 
   const handleEdit = () => {
-    router.push(`/aulas/editar?id=${classroom._id}`);
+    router.push(`/aula/edit?id=${classroom._id}`);
   };
 
   const handleToggleStatus = () => {

@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import Header from "@components/common/Navbar";
-import RecursosHeader from "@components/resources/RecursosHeader";
-import RecursosCard from "@components/resources/RecursosCard";
-import { getRecursos, deleteRecurso, toggleEstadoRecurso } from "@/services/recursosService";
+import RecursosHeader from "@components/recursos/RecursosHeader";
+import RecursosCard from "@components/recursos/RecursosCard";
+import { getRecursos, deleteRecurso, toggleEstadoRecurso } from "@services/recursosService";
 
 export default function RecursosPage() {
   const [searchQuery, setSearchQuery] = useState("");

@@ -1,51 +1,50 @@
-import { API_BASE_URL_AULAS } from './constants';
+// src/config/apiConfig.js
 
-// Configuración para desarrollo y producción
-const isDevelopment = process.env.NODE_ENV === 'development';
+const BASE_URL = 'https://back-aulas-production.up.railway.app';
 
-// Configuración por defecto para fetch
-const defaultFetchConfig = {
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-  },
+const defaultHeaders = {
+  'Content-Type': 'application/json',
+  Accept: 'application/json',
 };
 
 export const apiRequest = async (url, options = {}) => {
   const config = {
-    ...defaultFetchConfig,
-    ...options,
+    method: options.method || 'GET',
     headers: {
-      ...defaultFetchConfig.headers,
-      ...options.headers,
+      ...defaultHeaders,
+      ...(options.headers || {}),
     },
+    body: options.body ? JSON.stringify(options.body) : undefined,
   };
 
   try {
-    const response = await fetch(url, config);
-    
+    const response = await fetch(`${BASE_URL}${url}`, config);
+
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+      throw new Error(errorData.message || `Error: ${response.status}`);
     }
-    
+
     return await response.json();
   } catch (error) {
-    console.error('API Request Error:', {
-      url,
-      error: error.message,
-    });
+    console.error('API Request Error:', { url, error: error.message });
     throw error;
   }
 };
 
-// Endpoints específicos
 export const API_ENDPOINTS = {
   AULAS: {
-    GET_ALL: '/aulas', // Ruta relativa en desarrollo (proxy)
+    GET_ALL: '/aulas',
     GET_BY_ID: (id) => `/aulas/${id}`,
     CREATE: '/aulas',
     UPDATE: (id) => `/aulas/${id}`,
     DELETE: (id) => `/aulas/${id}`,
-  }
+  },
+  RECURSOS: {
+    GET_ALL: '/recursos',
+    GET_BY_ID: (id) => `/recursos/${id}`,
+    CREATE: '/recursos',
+    UPDATE: (id) => `/recursos/${id}`,
+    DELETE: (id) => `/recursos/${id}`,
+  },
 };

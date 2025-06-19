@@ -17,5 +17,5 @@
       "@data/*": ["./data/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "test-axios.js"]
 }

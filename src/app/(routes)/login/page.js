@@ -1,6 +1,6 @@
 "use client";
 import "@i18n/i18n";
-import LoginForm from '@components/Login/LoginForm';
+import LoginForm from '@components/Logeo/LoginForm';
 import Alert from '@components/common/alerts/Alert';
 import PropTypes from 'prop-types';
 

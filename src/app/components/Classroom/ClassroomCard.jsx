@@ -12,9 +12,8 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Alert from "@components/common/alerts/Alert";
-import aulasService from "@services/aulasService";
 
-export default function ClassroomCard({ classroom, onDelete, onToggle }) {
+export default function ClassroomCard({ classroom, onDelete, onToggle, onEdit }) {
   const { t } = useTranslation();
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [showToggleStatusAlert, setShowToggleStatusAlert] = useState(false);
@@ -26,8 +25,7 @@ export default function ClassroomCard({ classroom, onDelete, onToggle }) {
 
   const confirmDelete = async () => {
     try {
-      await aulasService.deleteAula(classroom._id); // usa _id si viene de MongoDB
-      if (onDelete) onDelete(classroom._id);
+      if (onDelete) await onDelete(classroom._id);
     } catch (error) {
       console.error("Error eliminando aula:", error);
     } finally {
@@ -36,7 +34,11 @@ export default function ClassroomCard({ classroom, onDelete, onToggle }) {
   };
 
   const handleEdit = () => {
-    router.push(`/aula/edit?id=${classroom._id}`);
+    if (onEdit) {
+      onEdit(classroom._id); // Usar función externa (preferido)
+    } else {
+      router.push(`/aula/edit?id=${classroom._id}`); // fallback
+    }
   };
 
   const handleToggleStatus = () => {
@@ -45,15 +47,7 @@ export default function ClassroomCard({ classroom, onDelete, onToggle }) {
 
   const confirmToggleStatus = async () => {
     try {
-      const newEstado =
-        classroom.estado === "DISPONIBLE" ? "NO_DISPONIBLE" : "DISPONIBLE";
-
-      await aulasService.updateAula(classroom._id, {
-        ...classroom,
-        estado: newEstado,
-      });
-
-      if (onToggle) onToggle(classroom._id, newEstado);
+      if (onToggle) await onToggle(classroom._id);
     } catch (error) {
       console.error("Error cambiando estado del aula:", error);
     } finally {

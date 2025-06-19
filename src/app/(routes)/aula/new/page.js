@@ -1,22 +1,16 @@
 "use client";
 
-import CrearForm from '@components/ClassroomAssignment/CrearForm';
-import "@i18n/i18n";
-import Alert from '@components/common/alerts/Alert';
-import PropTypes from 'prop-types';
+import AulaForm from "@components/Classroom/AulaForm";
+import Header from "@components/common/Navbar";
 
-const CrearPage = ({ alert = null, handleSubmit = () => {} }) => {
+export default function CrearAulaPage() {
   return (
-    <div className="h-screen w-screen bg-principal_container">
-      {alert && <Alert type={alert.type} message={alert.message} />}
-      <CrearForm onSubmit={handleSubmit} alert={alert} />
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      <main className="p-6 max-w-3xl mx-auto">
+        <h1 className="text-2xl font-bold mb-6">Crear nueva aula</h1>
+        <AulaForm mode="create" />
+      </main>
     </div>
   );
-};
-
-CrearPage.propTypes = {
-  alert: PropTypes.object,
-  handleSubmit: PropTypes.func,
-};
-
-export default CrearPage;
+}

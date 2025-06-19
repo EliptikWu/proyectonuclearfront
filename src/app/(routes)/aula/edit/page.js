@@ -1,5 +1,5 @@
 "use client";
-import "@/i18n";
+import "@i18n/i18n";
 
 import EditarForm from '@/app/components/ClassroomAssignment/EditarForm';
 import Alert from '@components/common/alerts/Alert';

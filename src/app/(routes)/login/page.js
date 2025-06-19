@@ -1,5 +1,5 @@
 "use client";
-import "@/i18n";
+import "@i18n/i18n";
 import LoginForm from '@/app/components/Login/LoginForm';
 import Alert from '@components/common/alerts/Alert';
 import PropTypes from 'prop-types';

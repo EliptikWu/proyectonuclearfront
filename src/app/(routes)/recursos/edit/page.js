@@ -1,5 +1,5 @@
 'use client';
-import "@/i18n";
+import "@i18n/i18n";
 import { Suspense } from 'react';
 import Header from '@components/common/Navbar';
 import Alert from '@components/common/alerts/Alert';

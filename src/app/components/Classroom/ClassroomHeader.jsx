@@ -32,7 +32,7 @@ export default function ClassroomHeader({ searchQuery, setSearchQuery }) {
 
         <button
           className="bg-[var(--color-principal_purple)] hover:bg-purple-900 text-white text-sm px-4 py-2 rounded-md"
-          onClick={() => router.push("/recursos/visualizar")}
+          onClick={() => router.push("/recursos/view")}
         >
           Recursos TIC
         </button>

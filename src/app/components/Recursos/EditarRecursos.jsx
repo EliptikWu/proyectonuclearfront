@@ -108,7 +108,7 @@ const EditarRecursos = () => {
       <div className="flex items-center mb-6 px-12 py-8">
         <ChevronLeft
           className="w-6 h-6 text-black_text mr-2 cursor-pointer"
-          onClick={() => router.push('/recursos/visualizar')}
+          onClick={() => router.push('/recursos/view')}
         />
         <h2 className="text-2xl font-bold text-gray-800">Editar Material TIC</h2>
       </div>

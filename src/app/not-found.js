@@ -1,5 +1,5 @@
 "use client";
-import "./i18n";
+import "./i18n/i18n";
 import Header from "@components/common/Navbar";
 import NotFoundMessage from "@components/common/NotFoundMessage";
 

@@ -25,18 +25,18 @@ export default function RecursosHeader({ searchQuery, setSearchQuery }) {
       {/* Botones */}
       <div className="flex gap-3 justify-end">
         <button className="bg-[var(--color-blue_button_login)] hover:bg-[var(--color-blue_button_login_hover)] text-white text-sm px-4 py-2 rounded-md"
-          onClick={() => router.push("/recursos/crear")}>
+          onClick={() => router.push("/recursos/new")}>
           {t("recursos.create")}
         </button>
 
         <button
           className="bg-[var(--color-principal_purple)] hover:bg-purple-900 text-white text-sm px-4 py-2 rounded-md"
-          onClick={() => router.push("/aulas/visualizar")}
+          onClick={() => router.push("/aula/view")}
         >
           Aulas
         </button>
         <button className="bg-[var(--color-principal_purple)] hover:bg-purple-900 text-white text-sm px-4 py-2 rounded-md"
-        onClick={() => router.push("/auditoria")}>
+        onClick={() => router.push("/auditoria/view")}>
           Auditoria
         </button>
       </div>

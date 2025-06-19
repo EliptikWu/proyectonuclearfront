@@ -41,13 +41,13 @@ const filteredRecursos = recursos.filter((item) => {
         <div className="flex gap-2 justify-end w-full md:w-auto">
           <button
             className="px-4 py-2 rounded-lg bg-[var(--color-principal_purple)] text-white text-sm font-medium hover:bg-purple-900 transition"
-            onClick={() => router.push("/aulas/visualizar")}
+            onClick={() => router.push("/aula/view")}
           >
             Aulas
           </button>
           <button
             className="px-4 py-2 rounded-lg bg-[var(--color-blue_button_login)] text-white text-sm font-medium hover:bg-[var(--color-blue_button_login_hover)] transition"
-            onClick={() => router.push("/recursos")}
+            onClick={() => router.push("/recursos/new")}
           >
             {t("recursos.create")}
           </button>

@@ -1,5 +1,5 @@
 "use client";
-import classrooms from "../../data/classrooms";
+import classrooms from "@data/classrooms";
 import ClassroomCard from "./ClassroomCard";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
@@ -42,7 +42,7 @@ export default function ClassroomList() {
           </button>
           <button
             className="px-4 py-2 rounded-lg bg-[var(--color-blue_button_login)] text-white text-sm font-medium hover:bg-[var(--color-blue_button_login_hover)] transition"
-            onClick={() => router.push("/aulas/visualizar")}
+            onClick={() => router.push("/aula/view")}
           >
             {t("classrooms.create")}
           </button>

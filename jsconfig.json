@@ -13,8 +13,10 @@
       "@pages/*": ["./src/app/pages/*"],
       "@store/*": ["./src/app/store/*"],
       "@locales/*": ["./src/app/locales/*"],
-      "@routes/*": ["./src/app/routes/*"],
-      "@data/*": ["./src/app/data/*"]
+      "@routes/*": ["src/app/(routes)/*"],
+      "@data/*": ["./src/app/data/*"],
+      "@schemas/*": ["src/app/schemas/*"],
+      "@i18n/*": ["./src/app/i18n/*"],
     }
   },
   "include": ["src/**/*", "next-env.d.ts", ".next/types/**/*.ts"],

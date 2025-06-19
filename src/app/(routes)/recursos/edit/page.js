@@ -1,12 +1,12 @@
 'use client';
-import '../../i18n';
+import "@/i18n";
 import { Suspense } from 'react';
 import Header from '@components/common/Navbar';
 import Alert from '@components/common/alerts/Alert';
 import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
 
-const LazyEditarRecursos = dynamic(() => import('@components/resources/EditarRecursos'), {
+const LazyEditarRecursos = dynamic(() => import('@/app/components/Recursos/EditarRecursos'), {
   ssr: false,
   loading: () => <div className="text-center py-8">Cargando editor...</div>
 });

@@ -1,8 +1,8 @@
 "use client";
-import '../../i18n';
+import "@/i18n";
 
 import Header from '@components/common/Navbar';
-import CrearRecursos from '@components/resources/CrearRecursos';
+import CrearRecursos from '@/app/components/Recursos/CrearRecursos';
 import Alert from '@components/common/alerts/Alert';
 import PropTypes from 'prop-types';
 

@@ -1,7 +1,7 @@
 "use client";
-import '../../i18n'; 
 
-import CrearForm from '@components/crear/CrearForm';
+import CrearForm from '@components/ClassroomAssignment/CrearForm';
+import "@/i18n";
 import Alert from '@components/common/alerts/Alert';
 import PropTypes from 'prop-types';
 

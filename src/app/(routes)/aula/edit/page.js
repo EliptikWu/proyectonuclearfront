@@ -1,22 +1,22 @@
 "use client";
-import '../i18n';
+import "@/i18n";
 
-import LoginForm from '@components/login/LoginForm';
+import EditarForm from '@/app/components/ClassroomAssignment/EditarForm';
 import Alert from '@components/common/alerts/Alert';
 import PropTypes from 'prop-types';
 
-const LoginPage = ({ alert = null, handleSubmit = () => {} }) => {
+const EditarPage = ({ alert = null, handleSubmit = () => {} }) => {
   return (
     <div className="h-screen w-screen bg-principal_container">
       {alert && <Alert type={alert.type} message={alert.message} />}
-      <LoginForm onSubmit={handleSubmit} alert={alert} />
+      <EditarForm onSubmit={handleSubmit} alert={alert} />
     </div>
   );
 };
 
-LoginPage.propTypes = {
+EditarPage.propTypes = {
   alert: PropTypes.object,
   handleSubmit: PropTypes.func,
 };
 
-export default LoginPage;
+export default EditarPage;

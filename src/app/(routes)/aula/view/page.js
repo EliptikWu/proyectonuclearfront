@@ -1,7 +1,7 @@
 "use client";
 import ClassroomHeader from "@components/Classroom/ClassroomHeader";
 import ClassroomCard from "@components/Classroom/ClassroomCard";
-import classrooms from "../../data/classrooms"; 
+import classrooms from "@data/classrooms"; 
 import { useState } from "react";
 import Header from "@components/common/Navbar"; 
 

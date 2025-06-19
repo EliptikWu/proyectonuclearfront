@@ -1,7 +1,7 @@
 "use client";
-import '../i18n';
+import "@/i18n";
 import { useRouter } from "next/navigation";
-import VisualizarAuditoria from '@components/common/auditoria/visualizarAuditoria';
+import VisualizarAuditoria from '@/app/components/Auditoria/visualizarAuditoria';
 import Alert from '@components/common/alerts/Alert';
 import PropTypes from 'prop-types';
 import { auditorias } from '@data/auditoria';

@@ -15,7 +15,7 @@ export default function VisualizarAuditoria({ auditorias = [], handleCancel = ()
       <div className="flex items-center mb-6 px-12 py-8">
         <ChevronLeft
           className="w-6 h-6 text-black_text mr-2 cursor-pointer"
-          onClick={() => router.push("/aulas/visualizar")} 
+          onClick={() => router.push("/aula/view")} 
         />
         <h2 className="text-2xl font-bold text-gray-800">Historial de Auditoría</h2>
       </div>

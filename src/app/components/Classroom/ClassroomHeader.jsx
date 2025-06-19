@@ -25,7 +25,7 @@ export default function ClassroomHeader({ searchQuery, setSearchQuery }) {
       {/* Botones */}
       <div className="flex gap-3 justify-end">
         <button className="bg-[var(--color-blue_button_login)] hover:bg-[var(--color-blue_button_login_hover)] text-white text-sm px-4 py-2 rounded-md"
-        onClick={() => router.push("/aulas/crear")}>
+        onClick={() => router.push("/aula/new")}>
           {t("classrooms.create")}
           
         </button>
@@ -38,7 +38,7 @@ export default function ClassroomHeader({ searchQuery, setSearchQuery }) {
         </button>
           <button
             className="bg-[var(--color-principal_purple)] hover:bg-purple-900 text-white text-sm px-4 py-2 rounded-md"
-            onClick={() => router.push("/auditoria")}
+            onClick={() => router.push("/auditoria/view")}
           >
             Auditoría
           </button>

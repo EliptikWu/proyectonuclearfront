@@ -1,7 +1,7 @@
 "use client";
-import RecursosHeader from "@components/resources/RecursosHeader";
-import RecursosCard from "@components/resources/RecursosCard";
-import recursos from "../../data/recursos.js"; // Corrección de la ruta
+import RecursosHeader from "@components/Recursos/RecursosHeader.jsx";
+import RecursosCard from "@components/Recursos/RecursosCard.jsx";
+import recursos from "@data/recursos.js";
 import { useState } from "react";
 import Header from "@components/common/Navbar";
 

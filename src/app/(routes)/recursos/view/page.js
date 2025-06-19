@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import Header from "@components/common/Navbar";
-import RecursosHeader from "@components/recursos/RecursosHeader";
-import RecursosCard from "@components/recursos/RecursosCard";
+import RecursosHeader from "@components/Recursos/RecursosHeader";
+import RecursosCard from "@components/Recursos/RecursosCard";
 import { getRecursos, deleteRecurso, toggleEstadoRecurso } from "@services/recursosService";
 
 export default function RecursosPage() {
